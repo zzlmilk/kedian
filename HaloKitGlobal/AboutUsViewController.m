@@ -7,6 +7,7 @@
 //
 
 #import "AboutUsViewController.h"
+#import "BGLanageTool.h"
 
 
 @interface AboutUsViewController ()
@@ -17,9 +18,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     [self request];
+    self.title =  BGGetStringWithKeyFromTable(@"About us" , @"BGLanguageSetting");//Current version
+    self.lianxinwoLabel.text =   BGGetStringWithKeyFromTable(@"Contact number" , @"BGLanguageSetting");
+    self.currentVersion.text =   BGGetStringWithKeyFromTable(@"Current version" , @"BGLanguageSetting");
+
 }
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden=YES;
+    
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.tabBarController.tabBar.hidden=NO;
+    
+}
+
 
 //一进来就调用查询当前版本的号码
 -(void)request

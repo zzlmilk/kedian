@@ -19,6 +19,8 @@
 #import <CommonCrypto/CommonCryptor.h>
 #import "BGSocketClass.h"
 #import "AppDelegate.h"
+#import "BGLanageTool.h"
+
 #define DESDEVICEID @"deviceId"
 
 @interface LinkDeviceVc ()<Scan_VCDelegate,NSStreamDelegate,UINavigationControllerDelegate>
@@ -28,7 +30,7 @@
 @implementation LinkDeviceVc
 {
     Scan_VC * vc;
-    NSInputStream  * inputStream;
+    NSInputStream  * inputStream;//[userD setObject: clientId forKey:@"clientId"]
     NSOutputStream * outputStream;
     NSString *deviceId;
 }
@@ -95,6 +97,8 @@
     if (desStr.length > 6) {
         self.codeLabel.text = desStr;
         deviceId = desStr;
+        [userD setObject:deviceId forKey:DESDEVICEID];
+        self.linkBtn.backgroundColor = [UIColor colorWithRed:94/225.0 green:64/255.0 blue:52/255.0 alpha:1.0];
     }else{
         deviceId = @"";
     }
@@ -204,6 +208,9 @@ static const char* encryptWithKeyAndType(const char *text,CCOperation encryptOpe
     switch (streamEvent) {
         case NSStreamEventOpenCompleted:
             NSLog(@"Stream opened now");
+            break;
+        case NSStreamEventHasBytesAvailable:
+            NSLog(@"has bytes");
             if (theStream == inputStream) {
                 while ([inputStream hasBytesAvailable]) {
                     len = [inputStream read:buffer maxLength:sizeof(buffer)];
@@ -223,32 +230,55 @@ static const char* encryptWithKeyAndType(const char *text,CCOperation encryptOpe
                                 
                             }
                             if ([stateString intValue] == 404) {
-                                UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"项圈未连接" message:nil delegate:self cancelButtonTitle:@"已确定" otherButtonTitles:nil, nil];
-                                [alert show];
+                                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@""message:BGGetStringWithKeyFromTable(@"Not connected" , @"BGLanguageSetting")preferredStyle:UIAlertControllerStyleAlert];
+                                
+                                UIAlertAction *UIAlertActionStyleDefaultAction = [UIAlertAction actionWithTitle:@"OK"style: UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                                    
+                                }];
+                                [alertController addAction:UIAlertActionStyleDefaultAction];
+                                [self presentViewController:alertController animated:YES  completion:nil];
+                                
+                
                             }
                             //直接在这边做出判断
                             if ([stateString intValue]==402) {
-                                UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"项圈未连接" message:nil delegate:self cancelButtonTitle:@"已确定" otherButtonTitles:nil, nil];
-                                [alert show];
+                                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@""message:BGGetStringWithKeyFromTable(@"Not connected" , @"BGLanguageSetting")preferredStyle:UIAlertControllerStyleAlert];
+                                
+                                UIAlertAction *UIAlertActionStyleDefaultAction = [UIAlertAction actionWithTitle:@"OK"style: UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                                    
+                                }];
+                                [alertController addAction:UIAlertActionStyleDefaultAction];
+                                [self presentViewController:alertController animated:YES  completion:nil];
                             }
                             //直接在这边做出判断
                             if ([stateString intValue]==400) {
                                 NSUserDefaults *userD = [NSUserDefaults standardUserDefaults];
                                 [userD setObject:@"FALSE" forKey:@"contect"];
-                                UIAlertView * alert = [[UIAlertView alloc] initWithTitle:msgStr message:nil delegate:self cancelButtonTitle:@"已确定" otherButtonTitles:nil, nil];
+                                UIAlertView * alert = [[UIAlertView alloc] initWithTitle:msgStr message:nil delegate:self cancelButtonTitle:BGGetStringWithKeyFromTable(@"OK" , @"BGLanguageSetting") otherButtonTitles:nil, nil];
                                 [alert show];
                             }
                             if ([stateString intValue] == 405) {
-                                UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"项圈未连接" message:nil delegate:self cancelButtonTitle:@"已确定" otherButtonTitles:nil, nil];
-                                [alert show];
+                                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@""message:BGGetStringWithKeyFromTable(@"Not connected" , @"BGLanguageSetting")preferredStyle:UIAlertControllerStyleAlert];
+                                
+                                UIAlertAction *UIAlertActionStyleDefaultAction = [UIAlertAction actionWithTitle:@"OK"style: UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                                    
+                                }];
+                                [alertController addAction:UIAlertActionStyleDefaultAction];
+                                [self presentViewController:alertController animated:YES  completion:nil];
+
                                 
                             }if ([stateString intValue] == 411) {
-                                UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"注册超时，请重启设备" message:nil delegate:self cancelButtonTitle:@"已确定" otherButtonTitles:nil, nil];
-                                [alert show];
+                                
+                                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@""message:BGGetStringWithKeyFromTable(@"When the registration times out, restart the device" , @"BGLanguageSetting")preferredStyle:UIAlertControllerStyleAlert];
+                                
+                                UIAlertAction *UIAlertActionStyleDefaultAction = [UIAlertAction actionWithTitle:@"OK"style: UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                                    
+                                }];
+                                [alertController addAction:UIAlertActionStyleDefaultAction];
+                                [self presentViewController:alertController animated:YES  completion:nil];
+
                                 
                             }if ([stateString intValue] == 413) {
-                                UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"该设备已经被注册，请先解绑" message:nil delegate:self cancelButtonTitle:@"已确定" otherButtonTitles:nil, nil];
-                                [alert show];
                             }
                             
                             
@@ -260,28 +290,22 @@ static const char* encryptWithKeyAndType(const char *text,CCOperation encryptOpe
                     }
                 }
             }
-            break;
-        case NSStreamEventHasBytesAvailable:
-            NSLog(@"has bytes");
-            [self goToTableBarVc];
 
             break;
         case NSStreamEventHasSpaceAvailable:
             NSLog(@"Stream has space available now");
-            [self goToTableBarVc];
+            
             break;
         case NSStreamEventErrorOccurred:
             NSLog(@"Can not connect to the host!");
-            [self goToTableBarVc];
+            
 
             break;
         case NSStreamEventEndEncountered:
-            [self goToTableBarVc];
 
             break;
         default:
             NSLog(@"Unknown event %lu", (unsigned long)streamEvent);
-            [self goToTableBarVc];
 
     }
 }
@@ -290,20 +314,19 @@ static const char* encryptWithKeyAndType(const char *text,CCOperation encryptOpe
 
 
 - (void)goToTableBarVc{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    BGTableBarVc *tableBarVc = [storyboard instantiateViewControllerWithIdentifier:@"BGTableBarVc"];
-    [self.navigationController presentViewController:tableBarVc animated:YES completion:nil];
+    [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"isLogin"];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
 - (IBAction)skipAcion:(id)sender {
     [self initNetworkCommunication];
-    NSLog(@"deviceIddeviceId:%@", deviceId);
-    NSString *clientid = [[NSUserDefaults standardUserDefaults]objectForKey:@"clientId"];
-    NSDictionary * dict = @{@"deviceid":@"861933030001580",@"func":@"00",@"clientid":clientid};
-    NSString * response = [dict JSONString];
     NSUserDefaults *userD = [NSUserDefaults standardUserDefaults];
-    [userD setObject:@"861933030001580" forKey:DESDEVICEID];
+
+    NSLog(@"deviceIddeviceId4:%@", deviceId);
+    NSString *clientid = [[NSUserDefaults standardUserDefaults]objectForKey:@"clientId"];
+    NSDictionary * dict = @{@"deviceid":[userD objectForKey:@"deviceId"],@"func":@"00",@"clientid":clientid};
+    NSString * response = [dict JSONString];
     NSData * data = [[NSData alloc] initWithData:[response dataUsingEncoding:NSASCIIStringEncoding]];
     [outputStream write:[data bytes] maxLength:[data length]];
 

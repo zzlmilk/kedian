@@ -6,9 +6,8 @@
   Copyright © 2017年 范博. All rights reserved.
 */
 "Map" = "地图";
-"trajectory" = "轨迹";
 "Setting" = "设置";
-"HomePage" = "首頁";
+"Home" = "首頁";
 "Scan" = "掃描正確的二維碼";
 "Link" = "連接設備";
 "Skip" = "跳过";
@@ -17,7 +16,16 @@
 "Please scan the correct two-dimensional code" = "請掃描正確的二維碼";
 "Place the two-dimensional code on the collar's instruction manual into the box" = "將項圈設備使用說明書上的二維碼放入框內";
 "Google Map" = "谷歌地圖";
+"Please turn on your device and reconnect it on the device page" = "請開啟您的設備，在設備頁進行重連";
 "Find" = "查找";
+"Device does not have permission to open the album, please go to the phone settings open" = "設備未開啟相冊權限，請前往手機設置開啟";
+"Purple" = "紫色";
+
+"Unconnect" = "未連接";
+"No electronic fence has been created" = "還未創建電子圍欄";
+"Create an electronic fence successfully" = "創建電子圍欄成功";
+"Remove the electronic fence successfully" = "移除電子圍欄成功";
+"The electronic fence already exists" = "電子圍欄已存在";
 "Monitor" = "監控";
 "Device" = "設備";
 "Electricity" = "電量";
@@ -29,7 +37,7 @@
 "Feedback" = "意見反饋";
 "Help center" = "幫助中心";
 "About us" = "關於我們";
-"Device information" = "設備信息";
+"Device info" = "設備信息:";
 "Save" = "保存";
 "Device two-dimensional code" = "設備二維碼";
 "White" = "白色";

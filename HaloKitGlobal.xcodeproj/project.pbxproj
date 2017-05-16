@@ -13,6 +13,7 @@
 		511CD8AC1EBE79B000AF944C /* BGTrailVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 511CD8AB1EBE79B000AF944C /* BGTrailVc.m */; };
 		511F1EF11EB9448400F4DCF2 /* BGDeviceVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 511F1EF01EB9448400F4DCF2 /* BGDeviceVc.m */; };
 		511F1EF91EB96DBA00F4DCF2 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 511F1EF81EB96DBA00F4DCF2 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		512102B81ECB3D030052A6D5 /* BGMonitorVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 512102B71ECB3D030052A6D5 /* BGMonitorVc.m */; };
 		513EA4981EB8AF0800D536F2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 513EA4971EB8AF0800D536F2 /* main.m */; };
 		513EA49B1EB8AF0800D536F2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 513EA49A1EB8AF0800D536F2 /* AppDelegate.m */; };
 		513EA4A11EB8AF0800D536F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 513EA49F1EB8AF0800D536F2 /* Main.storyboard */; };
@@ -87,6 +88,8 @@
 		511F1EF01EB9448400F4DCF2 /* BGDeviceVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGDeviceVc.m; sourceTree = "<group>"; };
 		511F1EF71EB96DBA00F4DCF2 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		511F1EF81EB96DBA00F4DCF2 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		512102B61ECB3D030052A6D5 /* BGMonitorVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGMonitorVc.h; sourceTree = "<group>"; };
+		512102B71ECB3D030052A6D5 /* BGMonitorVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGMonitorVc.m; sourceTree = "<group>"; };
 		513EA4931EB8AF0800D536F2 /* HaloKitGlobal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HaloKitGlobal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		513EA4971EB8AF0800D536F2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		513EA4991EB8AF0800D536F2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -284,6 +287,8 @@
 				5141503C1EC1AB2F002CE5D0 /* HGDQQRCodeView.m */,
 				515457301EB98B890012D64E /* BGDeviceFirstCell.h */,
 				515457311EB98B890012D64E /* BGDeviceFirstCell.m */,
+				512102B61ECB3D030052A6D5 /* BGMonitorVc.h */,
+				512102B71ECB3D030052A6D5 /* BGMonitorVc.m */,
 				513EA4A21EB8AF0800D536F2 /* Assets.xcassets */,
 				513EA49F1EB8AF0800D536F2 /* Main.storyboard */,
 				513EA4A41EB8AF0800D536F2 /* LaunchScreen.storyboard */,
@@ -560,6 +565,7 @@
 			files = (
 				5115BA161EB9740A00A03ED2 /* GeTuiModel.m in Sources */,
 				513EA49B1EB8AF0800D536F2 /* AppDelegate.m in Sources */,
+				512102B81ECB3D030052A6D5 /* BGMonitorVc.m in Sources */,
 				516ACF6C1EB8B10000BC320B /* UIViewController+PopMessage.m in Sources */,
 				51815A4B1EBE84E900B22BF1 /* BGWalkpathModel.m in Sources */,
 				51815A631EBEE17300B22BF1 /* BGLighterVc.m in Sources */,

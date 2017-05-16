@@ -131,7 +131,7 @@
 /** APP已经接收到“远程”通知(推送) - (App运行在后台/App运行在前台) */
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     application.applicationIconBadgeNumber = 0; // 标签
-    //    NSLog(@"\n>>>[Receive RemoteNotification]:%@\n\n", userInfo);
+        NSLog(@"\n>>>[Receive RemoteNotification]:%@\n\n", userInfo);
 }
 
 /** APP已经接收到“远程”通知(推送) - 透传推送消息  */
@@ -210,12 +210,15 @@
     if (([getModel.state intValue] == 403)||([getModel.state intValue] == 410)) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"loginstate" object:getModel.state];
         NSLog(@"loginstate:%@", getModel.state);
+        
         NSUserDefaults * userD = [NSUserDefaults standardUserDefaults];
+        [userD setObject:@"FALSE" forKey:@"contect"];
         [userD setObject:@"OK" forKey:@"exict"];
     }
     //直接在这边做出判断
     if ([getModel.state intValue]==402) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"AppOffLine" object:nil];
+        [userD setObject:@"FALSE" forKey:@"contect"];
         NSLog(@"AppOffLine:%@", getModel.state);
 
     }

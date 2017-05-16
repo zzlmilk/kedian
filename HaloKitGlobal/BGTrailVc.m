@@ -16,6 +16,8 @@
 #import "YYModel.h"
 #import "BGWalkpathModel.h"
 #import <GoogleMaps/GoogleMaps.h>
+#import "BGLanageTool.h"
+
 @import GoogleMaps;
 @interface BGTrailVc ()<GMSMapViewDelegate, NSStreamDelegate>
 
@@ -44,7 +46,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"轨迹";
+    self.title = BGGetStringWithKeyFromTable(@"Monitor" , @"BGLanguageSetting");
     [self init_mapView];
     array = [NSMutableArray array];
 }
@@ -81,8 +83,8 @@
         [self drawTrailFromMap];
         NSLog(@"---------------:%@",array);
 
-    } failure:^(NSError *error) {
-        [self popFailureShow:@"请检查网络是否连接"];
+    } failure:^(NSError *error) {//Can not connect to the network Please try again later"
+        [self popFailureShow:BGGetStringWithKeyFromTable(@"Can not connect to the network Please try again later" , @"BGLanguageSetting")];
         NSLog(@"error:%@",error);
         NSLog(@"*------------------------------------*");
 
@@ -156,6 +158,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden=YES;
+
     [self getTrackNetWorking];
     
 
@@ -180,6 +184,7 @@ didTapPOIWithPlaceID:(NSString *)placeID
 
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
+
     [BGmapView clear];
     [array removeAllObjects];
 }
@@ -214,7 +219,8 @@ didTapPOIWithPlaceID:(NSString *)placeID
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    
+    self.tabBarController.tabBar.hidden=YES;
+
 }
 
 @end

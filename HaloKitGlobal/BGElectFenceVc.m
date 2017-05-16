@@ -15,6 +15,8 @@
 #import "JSONKit.h"
 #import "ZTSlider.h"
 #import "UIViewController+PopMessage.h"
+#import "BGLanageTool.h"
+
 /** 宽度比 */
 #define kScaleW [UIScreen mainScreen].bounds.size.width/375
 /** 高度比 */
@@ -64,15 +66,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     flag = YES;
-    self.title = @"电子围栏";
     self.view.userInteractionEnabled = YES;
-    self.title = BGGetStringWithKeyFromTable(@"Fence", @"BGLanguageSetting");
+    self.title = BGGetStringWithKeyFromTable(@"Electric fence", @"BGLanguageSetting");
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(data:) name:@"posttude" object:nil];
     titleArray = [NSArray arrayWithObjects:@"100",@"150",@"200",@"250",@"300",@"350",@"400",@"450",@"500",@"550",@"1000",@"2000", nil];
     radiusOfFence = [[NSString stringWithFormat:@"150"] intValue];
     deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceId"];
     NSLog(@"deviceIddeviceIddeviceIddeviceIddeviceIddeviceIddeviceId:%@",deviceId);
-    UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(electicFenceAct:)];
+    UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:BGGetStringWithKeyFromTable(@"Close", @"BGLanguageSetting") style:UIBarButtonItemStylePlain target:self action:@selector(electicFenceAct:)];
     self.navigationItem.rightBarButtonItem = myButton;
     
     
@@ -82,6 +83,8 @@
     radiusOfFence = 500;
     [self init_mapView];
     [self initRefreshBtn];
+    [self creatOperationView];
+
     [self OKFenceBtn];
     [self CancelFenceBtn];
 }
@@ -103,12 +106,12 @@
 -(void)OKFenceBtn{
     OKFenceBtn = [[UIButton alloc]init];
     OKFenceBtn.hidden = YES;
-    [OKFenceBtn setImage:[UIImage imageNamed:@"确定"] forState:UIControlStateNormal];
-    [self.view addSubview:OKFenceBtn];
+    [OKFenceBtn setImage:[UIImage imageNamed:@"ok"] forState:UIControlStateNormal];
+    [self.operationView addSubview:OKFenceBtn];
     [OKFenceBtn addTarget:self action:@selector(OKFenceBtnAct:) forControlEvents:UIControlEventTouchUpInside];
     [OKFenceBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(40, 40));
-        make.bottom.equalTo(self.view).with.offset(-125);
+        make.bottom.equalTo(self.view).with.offset(-85);
         make.right.equalTo(self.view).with.offset(- kScaleW/2 - 200);
     }];
 }
@@ -117,12 +120,12 @@
 -(void)CancelFenceBtn{
     CancelFenceBtn = [[UIButton alloc]init];
     CancelFenceBtn.hidden = YES;
-    [CancelFenceBtn setImage:[UIImage imageNamed:@"取消"] forState:UIControlStateNormal];
-    [self.view addSubview:CancelFenceBtn];
+    [CancelFenceBtn setImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
+    [self.operationView addSubview:CancelFenceBtn];
     [CancelFenceBtn addTarget:self action:@selector(CancelFenceBtnAct:) forControlEvents:UIControlEventTouchUpInside];
     [CancelFenceBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(40, 40));
-        make.bottom.equalTo(self.view).with.offset(-125);
+        make.bottom.equalTo(self.view).with.offset(-85);
         make.right.equalTo(self.view).with.offset(- kScaleW/2 - 50);
         
     }];
@@ -133,7 +136,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
-    [self creatOperationView];
+    self.tabBarController.tabBar.hidden=YES;
+
     [self initNetworkCommunication];
     [self findDog];
     NSString *latitudeStr   = [[NSUserDefaults standardUserDefaults] objectForKey:@"latitudeOfFenceCenter"];
@@ -180,7 +184,7 @@
     mapView.accessibilityElementsHidden = NO;
     self.view = mapView;
     
-    UIImage *house = [UIImage imageNamed:@"currentLocation"];
+    UIImage *house = [UIImage imageNamed:@"blue"];
     dogImgView = [[UIImageView alloc] initWithImage:house];
     CLLocationCoordinate2D position = CLLocationCoordinate2DMake(31.170785, 121.397421);
     dogMarker = [GMSMarker markerWithPosition:position];
@@ -205,7 +209,7 @@
     [dogTitleView addSubview:icon];
     
     centerLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 5, 100, 20)];
-    centerLabel.text = @"设置电子围栏";
+    centerLabel.text = BGGetStringWithKeyFromTable(@"Create an electronic fence", @"BGLanguageSetting");//
     centerLabel.userInteractionEnabled = YES;
     centerLabel.textColor = [UIColor whiteColor];
     centerLabel.font = [UIFont systemFontOfSize:12] ;
@@ -239,8 +243,8 @@
 }
 
 -(void)showAlertController {
- 
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示"message:@"确定删除电子围栏"preferredStyle:UIAlertControllerStyleAlert];
+ //Make sure to close the electronic fence
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@""message:BGGetStringWithKeyFromTable(@"Make sure to close the electronic fence", @"BGLanguageSetting")preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *UIAlertActionStyleCancelAction = [UIAlertAction actionWithTitle:@"Cancel"style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
         NSLog(@"UIAlertActionStyleCancel");
@@ -287,7 +291,7 @@
     _tilbl = [[UILabel alloc] init];
     _tilbl.textColor = [UIColor blackColor];
     [self.operationView addSubview:_tilbl];
-    _tilbl.text = @"范围大小：";
+    _tilbl.text =  BGGetStringWithKeyFromTable(@"Range size", @"BGLanguageSetting");//
     _tilbl.font = [UIFont systemFontOfSize:12*kScaleW];
     [_tilbl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.operationView.mas_left).offset(10*kScaleW);
@@ -342,6 +346,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    self.tabBarController.tabBar.hidden=NO;
+
     
 }
 
@@ -386,7 +392,7 @@
                         GeTuiModel * getModel = [GeTuiModel yy_modelWithJSON:output];
                         NSString * stateString = [NSString stringWithFormat:@"%@",getModel.state];
                         if ([stateString intValue] == 200&&[getModel.servercode isEqualToString:@"0C"]) {
-                            [self popSuccessShow:@"设置电子围栏成功！"];
+                            [self popSuccessShow:BGGetStringWithKeyFromTable(@"Create an electronic fence successfully", @"BGLanguageSetting")];//
                             OKFenceBtn.hidden = YES;
                             CancelFenceBtn.hidden = YES;
                             commonView.hidden = YES;
@@ -394,10 +400,18 @@
                             dogTitleView.hidden = YES;
 
                             [self dismissView];
+                            
+                            [UIView animateWithDuration:0.5 animations:^{
+                                initRefreshBtn.imageView.transform = CGAffineTransformMakeRotation(0);
+                                [initRefreshBtn.imageView.layer removeAllAnimations];
+                            } completion:^(BOOL finished) {
+                                [initRefreshBtn setImage:[UIImage imageNamed:@"location"] forState:UIControlStateNormal];
+                                
+                            }];
                         }
                         
                         if ([stateString intValue] == 200 && [getModel.servercode isEqualToString:@"0F"]) {
-                            [self popSuccessShow:@"移除电子围栏成功"];
+                            [self popSuccessShow:BGGetStringWithKeyFromTable(@"Remove the electronic fence successfully", @"BGLanguageSetting")];
                             //隐藏勾，叉，报警按钮
                             
                             commonView.hidden = NO;
@@ -408,29 +422,60 @@
                             [self dismissView];
                             circ.map = nil;
                             
+                            [UIView animateWithDuration:0.5 animations:^{
+                                initRefreshBtn.imageView.transform = CGAffineTransformMakeRotation(0);
+                                [initRefreshBtn.imageView.layer removeAllAnimations];
+                            } completion:^(BOOL finished) {
+                                [initRefreshBtn setImage:[UIImage imageNamed:@"location"] forState:UIControlStateNormal];
+                                
+                            }];
+
+                            
                         }
                         
                         if ([stateString intValue] == 200 && [getModel.servercode isEqualToString:@"05"]) {
                             //在这里需要判断网络请求下来的clinted与本地的是否一致
-                        
+                            [UIView animateWithDuration:0.5 animations:^{
+                                initRefreshBtn.imageView.transform = CGAffineTransformMakeRotation(0);
+                                [initRefreshBtn.imageView.layer removeAllAnimations];
+                            } completion:^(BOOL finished) {
+                                [initRefreshBtn setImage:[UIImage imageNamed:@"location"] forState:UIControlStateNormal];
+                                
+                            }];
+
                         }
                         
                         if ([stateString intValue] == 409 && [getModel.servercode isEqualToString:@"0C"]) {
                             //在这里需要判断网络请求下来的clinted与本地的是否一致
-                            [self popSuccessShow:@"电子围栏已存在"];
+                            [self popSuccessShow:BGGetStringWithKeyFromTable(@"The electronic fence already exists", @"BGLanguageSetting")];
+                            [UIView animateWithDuration:0.5 animations:^{
+                                initRefreshBtn.imageView.transform = CGAffineTransformMakeRotation(0);
+                                [initRefreshBtn.imageView.layer removeAllAnimations];
+                            } completion:^(BOOL finished) {
+                                [initRefreshBtn setImage:[UIImage imageNamed:@"location"] forState:UIControlStateNormal];
+                                
+                            }];
 
                         }
                         
                         if ([stateString intValue] == 407 && [getModel.servercode isEqualToString:@"0F"]) {
                             //在这里需要判断网络请求下来的clinted与本地的是否一致
-                            [self popSuccessShow:@"还未创建电子围栏"];
+                            [self popSuccessShow:BGGetStringWithKeyFromTable(@"No electronic fence has been created", @"BGLanguageSetting")];
                             [[NSUserDefaults standardUserDefaults] setObject:@"0.0" forKey:@"latitudeOfFenceCenter"];
                             [[NSUserDefaults standardUserDefaults] setObject:@"0.0" forKey:@"longitudeOfFenceCenter"];
+                            [UIView animateWithDuration:0.5 animations:^{
+                                initRefreshBtn.imageView.transform = CGAffineTransformMakeRotation(0);
+                                [initRefreshBtn.imageView.layer removeAllAnimations];
+                            } completion:^(BOOL finished) {
+                                [initRefreshBtn setImage:[UIImage imageNamed:@"location"] forState:UIControlStateNormal];
+                                
+                            }];
 
-                        }
+
+                        }//The device is not connected
                         
                         if ([stateString intValue] == 402) {
-                            [self popFailureShow:@"App端未连接..."];
+                            [self popFailureShow:BGGetStringWithKeyFromTable(@"The device is not connected", @"BGLanguageSetting")];
                         }
                     }
                 }
@@ -439,17 +484,48 @@
         case NSStreamEventHasSpaceAvailable:
             NSLog(@"Stream has space available now");
 //            [self popFailureShow:@"请重启项圈"];
+        {
+            [UIView animateWithDuration:0.5 animations:^{
+                initRefreshBtn.imageView.transform = CGAffineTransformMakeRotation(0);
+                [initRefreshBtn.imageView.layer removeAllAnimations];
+            } completion:^(BOOL finished) {
+                [initRefreshBtn setImage:[UIImage imageNamed:@"location"] forState:UIControlStateNormal];
+                
+            }];
+
+        }
 
             break;
-        case NSStreamEventErrorOccurred:
+        case NSStreamEventErrorOccurred://Load failed, please reload
             NSLog(@"Can not connect to the host!");
-            [self popFailureShow:@"请检查您的网络"];
+            [self popFailureShow:BGGetStringWithKeyFromTable(@"Load failed, please reload", @"BGLanguageSetting")];
+        {
+            [UIView animateWithDuration:0.5 animations:^{
+                initRefreshBtn.imageView.transform = CGAffineTransformMakeRotation(0);
+                [initRefreshBtn.imageView.layer removeAllAnimations];
+            } completion:^(BOOL finished) {
+                [initRefreshBtn setImage:[UIImage imageNamed:@"location"] forState:UIControlStateNormal];
+                
+            }];
+            
+        }
 
             break;
             
         case NSStreamEventEndEncountered:
             [theStream close];
             [theStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+        {
+            [UIView animateWithDuration:0.5 animations:^{
+                initRefreshBtn.imageView.transform = CGAffineTransformMakeRotation(0);
+                [initRefreshBtn.imageView.layer removeAllAnimations];
+            } completion:^(BOOL finished) {
+                [initRefreshBtn setImage:[UIImage imageNamed:@"location"] forState:UIControlStateNormal];
+                
+            }];
+            
+        }
+
             break;
         default:
             NSLog(@"Unknown event %lu", (unsigned long)streamEvent);
@@ -473,9 +549,7 @@
 - (void)refurbishAct:(id)sender {
     [self initNetworkCommunication];
     [self requestLocation];
-    if (flag) {
         [initRefreshBtn setImage:[UIImage imageNamed:@"refeshLocation"] forState:UIControlStateNormal];
-        flag = NO;
         CABasicAnimation *animation =  [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
                                         //默认是顺时针效果，若将fromValue和toValue的值互换，则为逆时针效果
                                         animation.fromValue =   [NSNumber numberWithFloat: 0.f];;
@@ -485,19 +559,9 @@
                                         animation.fillMode =kCAFillModeForwards;
                                         animation.repeatCount = MAXFLOAT; //如果这里想设置成一直自旋转，可以设置为MAXFLOAT，否则设置具体的数值则代表执行多少次
                                         [initRefreshBtn.imageView.layer addAnimation:animation forKey:nil];
-    }
-    else {
-        
+    
 
-        [UIView animateWithDuration:0.5 animations:^{
-            initRefreshBtn.imageView.transform = CGAffineTransformMakeRotation(0);
-            [initRefreshBtn.imageView.layer removeAllAnimations];
-        } completion:^(BOOL finished) {
-            flag = YES;
-        }];
-        [initRefreshBtn setImage:[UIImage imageNamed:@"location"] forState:UIControlStateNormal];
-
-    }}
+}
 
 //发送电子围栏
 -(void)OKFenceBtnAct:(id)sender{
@@ -525,8 +589,7 @@
         NSData * data = [[NSData alloc] initWithData:[response dataUsingEncoding:NSASCIIStringEncoding]];
         [outputStream write:(Byte *)[data bytes] maxLength:[data length]];
     }else{
-        [self popFailureShow:@"设备为链接"];
-    }
+[self popFailureShow:BGGetStringWithKeyFromTable(@"The device is not connected", @"BGLanguageSetting")];    }
 }
 
 //向服务器请求位置
@@ -539,8 +602,7 @@
         NSData * data = [[NSData alloc] initWithData:[response dataUsingEncoding:NSASCIIStringEncoding]];
         [outputStream write:(Byte *)[data bytes] maxLength:[data length]];
     }else{
-        [self popFailureShow:@"设备未链接"];
-
+[self popFailureShow:BGGetStringWithKeyFromTable(@"The device is not connected", @"BGLanguageSetting")];
     }
 }
 
@@ -561,7 +623,7 @@
         NSData * data = [[NSData alloc] initWithData:[response dataUsingEncoding:NSASCIIStringEncoding]];
         [outputStream write:(Byte *)[data bytes] maxLength:[data length]];
     }else{
-        [self popFailureShow:@"设备为链接"];
+[self popFailureShow:BGGetStringWithKeyFromTable(@"The device is not connected", @"BGLanguageSetting")];
     }
 }
 
@@ -577,8 +639,7 @@
     NSData * data = [[NSData alloc] initWithData:[response dataUsingEncoding:NSASCIIStringEncoding]];
     [outputStream write:(Byte *)[data bytes] maxLength:[data length]];
     }else{
-        [self popFailureShow:@"设备为链接"];
-
+[self popFailureShow:BGGetStringWithKeyFromTable(@"The device is not connected", @"BGLanguageSetting")];
     }
 }
 
@@ -588,7 +649,7 @@
 
     [UIView animateWithDuration:1.5 animations:^{
         //选择半径的视图出现
-        self.operationView.frame = CGRectMake(0, kDeviceHeight - 44 - 85, kDeviceWidth, 85);
+        self.operationView.frame = CGRectMake(0, kDeviceHeight - 85, kDeviceWidth, 85);
         commonView.hidden = YES;
         dogTitleView.hidden = YES;
         [self addOverlayView];

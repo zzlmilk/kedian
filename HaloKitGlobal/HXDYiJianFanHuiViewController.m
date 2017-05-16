@@ -11,6 +11,7 @@
 #import "UIViewController+PopMessage.h"
 #import "HttpRequest.h"
 #import "HttpRequest_url.h"
+#import "BGLanageTool.h"
 
 //获取屏幕 宽度、高度
 #define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
@@ -71,6 +72,19 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden=YES;
+
+
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.tabBarController.tabBar.hidden=NO;
+
+}
+
 //创建导航栏的视图
 -(void)createNavigationView
 {
@@ -92,7 +106,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     UIView * view1=[[UIView alloc]init];
     view1.userInteractionEnabled=YES;
-    
+    self.title = BGGetStringWithKeyFromTable(@"Feedback" , @"BGLanguageSetting");
     view1.backgroundColor=HWColor(0, 231, 157);
     view1.layer.borderWidth=0.5;//边框设置
     view1.layer.cornerRadius = 5;//倒角
@@ -111,9 +125,9 @@
     [view1 addSubview:feedBackTextView];//用来填写反馈内容
     
     //提示语
-    tipLabel = [[UILabel alloc]init];
+    tipLabel = [[UILabel alloc]init];//Please fill in your suggestions or problems
     
-    tipLabel.text = @"感谢您在此提供问题和意见";
+    tipLabel.text = BGGetStringWithKeyFromTable(@"Please fill in your suggestions or problems" , @"BGLanguageSetting");
     tipLabel.numberOfLines = 0; // 最关键的一句
     tipLabel.font = [UIFont systemFontOfSize:14.0];
     tipLabel.textColor = [UIColor lightGrayColor];
@@ -134,13 +148,13 @@
     [self.view addSubview:view2];
     
     
-    //提示语
+    //提示语////
     UILabel * latipLabel = [[UILabel alloc]init];
-    latipLabel.text = @"联系方式";
+    latipLabel.text = BGGetStringWithKeyFromTable(@"Contact number" , @"BGLanguageSetting");
     
     latipLabel.backgroundColor=[UIColor whiteColor];
     //latipLabel.numberOfLines = 0; // 最关键的一句
-    latipLabel.font = [UIFont systemFontOfSize:14.0];
+    latipLabel.font = [UIFont systemFontOfSize:13.0];
     latipLabel.textColor = [UIColor blackColor];
     
     [view2 addSubview:latipLabel]; //提示语
@@ -163,7 +177,7 @@
     phoneNum.backgroundColor=[UIColor whiteColor];
     phoneNum.font = [UIFont systemFontOfSize:14.0];
     phoneNum.textColor = [UIColor blackColor];
-    [phoneNum setPlaceholder:@"请输入您的手机号"];
+    [phoneNum setPlaceholder:BGGetStringWithKeyFromTable(@"Optional, so that we can contact you" , @"BGLanguageSetting")];
     //phoneNum.secureTextEntry = YES;
     phoneNum.delegate=self;
     phoneNum.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -192,8 +206,8 @@
     }
 
     
-    [registerBtn setTitle:@"提  交" forState:UIControlStateNormal];
-    registerBtn.backgroundColor = [UIColor colorWithRed:0.76 green:0.86 blue:0.11 alpha:0.5];
+    [registerBtn setTitle:BGGetStringWithKeyFromTable(@"Submit" , @"BGLanguageSetting") forState:UIControlStateNormal];
+    registerBtn.backgroundColor = [UIColor colorWithRed:112/255.0 green:117/255.0 blue:156/255.0 alpha:0.5];
     [registerBtn addTarget:self action:@selector(tijiaoTap) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -205,7 +219,7 @@
         feedBackTextView.frame=CGRectMake(5, 5, view1.frame.size.width-10, 150);
         tipLabel.frame=CGRectMake(10, 0, SCREEN_WIDTH - 40, 45);
         view2.frame=CGRectMake(5, view1.bottom+15, SCREEN_WIDTH-10, 50);
-        latipLabel.frame=CGRectMake(5, 5, 60, 40);
+        latipLabel.frame=CGRectMake(5, 5, 70, 40);
         latipLabellin.frame=CGRectMake(CGRectGetMaxX(latipLabel.frame), 5, 1, 40);
         phoneNum.frame=CGRectMake(CGRectGetMaxX(latipLabel.frame)+5, 5, view2.frame.size.width-latipLabel.frame.size.width-latipLabellin.frame.size.width-15, 40);
         view3.frame=CGRectMake(10, view2.bottom+15, SCREEN_WIDTH-20, 44);
@@ -218,7 +232,7 @@
         feedBackTextView.frame=CGRectMake(5, 5, view1.frame.size.width-10, 190);
         tipLabel.frame=CGRectMake(10, 0, SCREEN_WIDTH - 40, 45);
         view2.frame=CGRectMake(5, view1.bottom+15, SCREEN_WIDTH-10, 50);
-        latipLabel.frame=CGRectMake(5, 5, 60, 40);
+        latipLabel.frame=CGRectMake(5, 5, 70, 40);
         latipLabellin.frame=CGRectMake(CGRectGetMaxX(latipLabel.frame), 5, 1, 40);
         phoneNum.frame=CGRectMake(CGRectGetMaxX(latipLabel.frame)+5, 5, view2.frame.size.width-latipLabel.frame.size.width-latipLabellin.frame.size.width-15, 40);
         view3.frame=CGRectMake(10, view2.bottom+15, SCREEN_WIDTH-20, 44);
@@ -238,11 +252,11 @@
         [parameters setObject:phoneNum.text forKey:@"phone"];//联系方式
         
         [[HttpRequest sharedInstance] POST:[HttpRequest_url advice_postUrl] dict:parameters succeed:^(id data) {
-            [self popFailureShow:@"意见反馈成功"];
+            [self popFailureShow:BGGetStringWithKeyFromTable(@"Submitted successfully" , @"BGLanguageSetting")];//Submitted successfully
             [self.navigationController popViewControllerAnimated:YES];
 
-        } failure:^(NSError *error) {
-            [self popFailureShow:@"请检查网络是否连接"];
+        } failure:^(NSError *error) {//The connection failed, please reconnect
+            [self popFailureShow:BGGetStringWithKeyFromTable(@"The connection failed, please reconnect" , @"BGLanguageSetting")];
 
         }];
     }
@@ -253,13 +267,20 @@
     //如果帐号为空
     if ([feedBackTextView.text isEqualToString:@""] || [phoneNum.text isEqualToString:@""])
     {
-        [self popFailureShow:@"反馈内容或手机号码为空"];
+        if ([feedBackTextView.text isEqualToString:@""]){
+        
+        }else{
+            [self popFailureShow:BGGetStringWithKeyFromTable(@"please enter a valid phone number" , @"BGLanguageSetting")];//please enter a valid phone number
+
+        
+        }
         return NO;
     }
     //如果输入的手机号格式不对
     else if ([self isValidateMobile:phoneNum.text] == NO)
     {
-        [self popFailureShow:@"您输入的手机号码有误，请检查重新输入"];
+            [self popFailureShow:BGGetStringWithKeyFromTable(@"please enter a valid phone number" , @"BGLanguageSetting")];
+        
         return NO;
     }
         //提示 标签不能输入特殊字符

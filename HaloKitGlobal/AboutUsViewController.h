@@ -14,5 +14,7 @@
 - (IBAction)back:(id)sender;
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
 @property (weak, nonatomic) IBOutlet UIButton *verisionBtn;
+@property (weak, nonatomic) IBOutlet UILabel *lianxinwoLabel;
+@property (weak, nonatomic) IBOutlet UILabel *currentVersion;
 
 @end

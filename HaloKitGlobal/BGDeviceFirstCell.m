@@ -20,4 +20,7 @@
 
 }
 
+- (IBAction)lianjieAction:(id)sender {
+    [self.delegate lianjieAct];
+}
 @end

@@ -7,7 +7,8 @@
 #define CNS @"zh-Hans"
 #define EN @"en"
 #define LANGUAGE_SET @"langeuageset"
-
+#define AR @"ar"
+#define CNT @"zh-Hant"
 
 #import "BoGeLangageSettingVc.h"
 #import "BGLanageTool.h"
@@ -23,13 +24,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    array = [NSArray arrayWithObjects:@"English", @"简体中文", @"繁体中文", @"阿拉伯文", nil];
+    array = [NSArray arrayWithObjects:@"English", @"简体中文", @"繁体中文", @"العربية", nil];
     [self.tableView registerClass:UITableViewCell.self forCellReuseIdentifier:@"cell"];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    self.tabBarController.tabBar.hidden = YES;
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewDidDisappear:animated];
+    self.tabBarController.tabBar.hidden = NO;
+
 }
 
 #pragma mark - Table view data source
@@ -49,6 +64,7 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
     cell.textLabel.text = array[indexPath.row];
+    cell.textLabel.font = [UIFont systemFontOfSize:13];
     
     return cell;
 }
@@ -63,11 +79,11 @@
 
             break;
         case 2 :
-            [[BGLanageTool sharedInstance] setNewLanguage: EN];
+            [[BGLanageTool sharedInstance] setNewLanguage: CNT];
 
             break;
         default:
-            [[BGLanageTool sharedInstance] setNewLanguage: EN];
+            [[BGLanageTool sharedInstance] setNewLanguage: AR];
 
             break;
     }

@@ -6,9 +6,8 @@
   Copyright © 2017年 范博. All rights reserved.
 */
 "Map" = "地图";
-"trajectory" = "轨迹";
 "Setting" = "设置";
-"HomePage" = "首页";
+"Home" = "منزل";
 "Scan" = "يرجى تصحيح ثنائي الأبعاد مسح كود";
 "Link" = "الأجهزة المتصلة";
 "Skip" = "跳过";
@@ -19,8 +18,16 @@
 "Google Map" = "خريطة جوجل";
 "Find" = "بحث";
 "Monitor" = "مراقب";
+"Please turn on your device and reconnect it on the device page" = "يرجى بدوره على جهازك، وإعادة ربط صفحة الجهاز";
+"Create an electronic fence successfully" = "إزالة نجاح سياج الكتروني";
+"Remove the electronic fence successfully" = "إزالة نجاح سياج الكتروني";
+"The electronic fence already exists" = "سياج الكتروني موجود بالفعل";
+"No electronic fence has been created" = "بعد إنشاء سياج الكتروني";
 "Device" = "معدات";
 "Electricity" = "قوة";
+"Device does not have permission to open the album, please go to the phone settings open" = "الجهاز ليس على أذونات الألبوم، انتقل إلى جهاز هاتف لفتح";
+"Unconnect" = "لا علاقة";
+"Purple" = "بنفسجي";
 "Not connected" = "لا علاقة";
 "Connected" = "متصل";
 "Getting" = "الحصول على";
@@ -28,7 +35,7 @@
 "Connect to other devices" = "توصيل أجهزة أخرى";
 "Help center" = "مساعدة";
 "About us" = "من نحن";
-"Device information" = "معلومات الجهاز";
+"Device Info" = "معلومات الجهاز";
 "Save" = "حفظ";
 "Device two-dimensional code" = "معدات رمز ثنائي الأبعاد";
 "Feedback" = "ردود الفعل";

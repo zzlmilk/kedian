@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BGLanageTool.h"
 
 @interface BGDeviceVc : UITableViewController
 @property (weak, nonatomic) IBOutlet UIImageView *iconImgView;

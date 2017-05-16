@@ -19,51 +19,38 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="English" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JfF-Bo-f0b">
-                        <rect key="frame" x="236" y="12" width="76" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="21" id="OrV-NE-E6s"/>
-                            <constraint firstAttribute="width" constant="76" id="RbS-El-Cfg"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Language setting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S5j-Az-wej">
-                        <rect key="frame" x="52" y="13" width="119" height="18"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <rect key="frame" x="52" y="14.5" width="105.5" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chooselaguage" translatesAutoresizingMaskIntoConstraints="NO" id="Nbd-n9-G3m">
-                        <rect key="frame" x="8" y="8" width="27" height="27"/>
+                        <rect key="frame" x="9" y="10" width="23" height="23"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="27" id="2pL-SN-52U"/>
-                            <constraint firstAttribute="width" constant="27" id="6eD-tb-rgh"/>
+                            <constraint firstAttribute="height" constant="23" id="2pL-SN-52U"/>
+                            <constraint firstAttribute="width" constant="23" id="6eD-tb-rgh"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="more" translatesAutoresizingMaskIntoConstraints="NO" id="RCZ-eQ-LQq">
-                        <rect key="frame" x="296" y="10" width="16" height="24"/>
+                        <rect key="frame" x="301" y="15" width="8" height="14"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="24" id="Fte-ZY-LsC"/>
-                            <constraint firstAttribute="width" constant="16" id="kEN-td-5Pp"/>
+                            <constraint firstAttribute="height" constant="14" id="Fte-ZY-LsC"/>
+                            <constraint firstAttribute="width" constant="8" id="kEN-td-5Pp"/>
                         </constraints>
                     </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="S5j-Az-wej" firstAttribute="centerY" secondItem="kwG-eP-dma" secondAttribute="centerY" id="7fu-Le-tYL"/>
-                    <constraint firstItem="Nbd-n9-G3m" firstAttribute="leading" secondItem="kwG-eP-dma" secondAttribute="leading" constant="8" id="DEo-MD-lZV"/>
-                    <constraint firstItem="S5j-Az-wej" firstAttribute="leading" secondItem="Nbd-n9-G3m" secondAttribute="trailing" constant="17" id="DJF-WM-w8c"/>
-                    <constraint firstItem="RCZ-eQ-LQq" firstAttribute="trailing" secondItem="kwG-eP-dma" secondAttribute="trailingMargin" id="DuQ-GQ-U0Z"/>
-                    <constraint firstItem="Nbd-n9-G3m" firstAttribute="top" secondItem="kwG-eP-dma" secondAttribute="top" constant="8" id="Mhw-ty-MsR"/>
+                    <constraint firstItem="Nbd-n9-G3m" firstAttribute="leading" secondItem="kwG-eP-dma" secondAttribute="leading" constant="9" id="DEo-MD-lZV"/>
+                    <constraint firstItem="S5j-Az-wej" firstAttribute="leading" secondItem="Nbd-n9-G3m" secondAttribute="trailing" constant="20" id="DJF-WM-w8c"/>
+                    <constraint firstItem="RCZ-eQ-LQq" firstAttribute="trailing" secondItem="kwG-eP-dma" secondAttribute="trailingMargin" constant="-3" id="DuQ-GQ-U0Z"/>
+                    <constraint firstItem="Nbd-n9-G3m" firstAttribute="top" secondItem="kwG-eP-dma" secondAttribute="top" constant="10" id="Mhw-ty-MsR"/>
                     <constraint firstItem="RCZ-eQ-LQq" firstAttribute="centerY" secondItem="kwG-eP-dma" secondAttribute="centerY" id="N8g-v2-bRT"/>
-                    <constraint firstItem="JfF-Bo-f0b" firstAttribute="centerY" secondItem="kwG-eP-dma" secondAttribute="centerY" id="WJD-Mw-rK7"/>
-                    <constraint firstItem="JfF-Bo-f0b" firstAttribute="trailing" secondItem="kwG-eP-dma" secondAttribute="trailingMargin" id="XiR-3D-QPx"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="img" destination="Nbd-n9-G3m" id="fXr-XV-2l6"/>
-                <outlet property="lanuageLabel" destination="JfF-Bo-f0b" id="iSd-Cx-F8E"/>
                 <outlet property="moreImg" destination="RCZ-eQ-LQq" id="QPB-Wp-J21"/>
                 <outlet property="titleLabel" destination="S5j-Az-wej" id="Sra-BU-Qti"/>
             </connections>

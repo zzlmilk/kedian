@@ -108,13 +108,13 @@ static BGLanageTool *sharedModel;
     [self resetRootViewController];
 }
 
--(void)resetRootViewController
+-(void)resetRootViewController 
 {
     AppDelegate *appDelegate =
     (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UINavigationController *rootNav = [storyBoard instantiateViewControllerWithIdentifier:@"rootnav"];
+    UINavigationController *rootNav = [storyBoard instantiateViewControllerWithIdentifier:@"BGTableBarVc"];
     appDelegate.window.rootViewController = rootNav;
 }
 

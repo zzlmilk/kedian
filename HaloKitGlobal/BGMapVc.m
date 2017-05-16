@@ -15,6 +15,9 @@
 #import "NSObject+YYModel.h"
 #import "GeTuiModel.h"
 #import "JSONKit.h"
+#import "BGLanageTool.h"
+#import "LinkDeviceVc.h"
+
 @import GoogleMaps;
 #define DESDEVICEID @"deviceId"
 #define SCREENW [UIScreen mainScreen].bounds.size.width
@@ -47,19 +50,46 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    flag = YES;
+    deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceId"];
 
+    NSString * longin = [[NSUserDefaults standardUserDefaults] objectForKey:@"isLogin"];
+    if (deviceId) {//[longin isEqualToString:@"YES"]
+        NSLog(@"--------------------ddd:%@",longin);
+        [self skipAcion];
+    }else{
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UINavigationController *deviceVc = [storyboard instantiateViewControllerWithIdentifier:@"nav"];
+        [self presentViewController:deviceVc animated:YES completion:nil];
+        NSLog(@"********************ddd");
+    }
+
+    flag = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(data:) name:@"Hposttude" object:nil];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title = BGGetStringWithKeyFromTable(@"HomePage", @"BGLanguageSetting");
-    deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceId"];
+    self.title = BGGetStringWithKeyFromTable(@"Home", @"BGLanguageSetting");
     [self init_mapView];
     [self initRefreshBtn];
     [self initFenceBtn];
     [self findDog];
-    
+
     [BGLanageTool getPreferredLanguage];
 }
+
+
+- (void)skipAcion {
+    [self initNetworkCommunication];
+    NSLog(@"deviceIddeviceId2:%@", deviceId);
+    if (deviceId) {
+        NSString *clientid = [[NSUserDefaults standardUserDefaults]objectForKey:@"clientId"];
+        NSDictionary * dict = @{@"deviceid":deviceId ,@"func":@"00",@"clientid":clientid};
+        NSString * response = [dict JSONString];
+        NSData * data = [[NSData alloc] initWithData:[response dataUsingEncoding:NSASCIIStringEncoding]];
+        [outputStream write:[data bytes] maxLength:[data length]];
+
+    }
+    
+}
+
 
 
 -(void)initRefreshBtn{
@@ -78,33 +108,16 @@
     [refreshButton setImage:[UIImage imageNamed:@"refeshLocation"] forState:UIControlStateNormal];
     [self initNetworkCommunication];
     [self requestLocation];
-    if (flag) {
-        flag = NO;
-        CABasicAnimation *animation =  [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
-        //默认是顺时针效果，若将fromValue和toValue的值互换，则为逆时针效果
-        animation.fromValue =   [NSNumber numberWithFloat: 0.f];;
-        animation.toValue =  [NSNumber numberWithFloat: M_PI *2];
-        animation.duration  = 1.5;
-        animation.autoreverses = NO;
-        animation.fillMode =kCAFillModeForwards;
-        animation.repeatCount = MAXFLOAT; //如果这里想设置成一直自旋转，可以设置为MAXFLOAT，否则设置具体的数值则代表执行多少次
-        [refreshButton.imageView.layer addAnimation:animation forKey:nil];
-    }
-    else {
-        
-
-        [UIView animateWithDuration:0.5 animations:^{
-            
-            refreshButton.imageView.transform = CGAffineTransformMakeRotation(0);
-            [refreshButton.imageView.layer removeAllAnimations];
-        } completion:^(BOOL finished) {
-            flag = YES;
-            [refreshButton setImage:[UIImage imageNamed:@"location"] forState:UIControlStateNormal];
-
-        }];
-
-    }
-
+    CABasicAnimation *animation =  [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+    //默认是顺时针效果，若将fromValue和toValue的值互换，则为逆时针效果
+    animation.fromValue =   [NSNumber numberWithFloat: 0.f];;
+    animation.toValue =  [NSNumber numberWithFloat: M_PI *2];
+    animation.duration  = 1.5;
+    animation.autoreverses = NO;
+    animation.fillMode =kCAFillModeForwards;
+    animation.repeatCount = MAXFLOAT; //如果这里想设置成一直自旋转，可以设置为MAXFLOAT，否则设置具体的数值则代表执行多少次
+    [refreshButton.imageView.layer addAnimation:animation forKey:nil];
+ 
 }
 
 
@@ -117,7 +130,7 @@
         NSData * data = [[NSData alloc] initWithData:[response dataUsingEncoding:NSASCIIStringEncoding]];
         [outputStream write:(Byte *)[data bytes] maxLength:[data length]];
     }else{
-        [self popFailureShow:@"设备未链接"];
+        [self popFailureShow:BGGetStringWithKeyFromTable(@"The device is not connected", @"BGLanguageSetting")  ];//The device is not connected
     }
 }
 
@@ -139,7 +152,7 @@
             make.left.equalTo(self.view).with.offset(10);
         }];
     }else{
-        [self popFailureShow:@"设备为链接"];
+        [self popFailureShow:BGGetStringWithKeyFromTable(@"The device is not connected", @"BGLanguageSetting")];
     }
 }
 
@@ -315,6 +328,9 @@
     switch (streamEvent) {
         case NSStreamEventOpenCompleted:
             NSLog(@"Stream opened now");
+            break;
+        case NSStreamEventHasBytesAvailable:
+            NSLog(@"has bytes");
             if (theStream == inputStream) {
                 while ([inputStream hasBytesAvailable]) {
                     len = [inputStream read:buffer maxLength:sizeof(buffer)];
@@ -330,19 +346,51 @@
                                 NSUserDefaults * userD = [NSUserDefaults standardUserDefaults];
                                 [userD setObject:@"TRUE" forKey:@"contect"];
                                 [userD setObject:deviceId forKey:@"deviceId"];
+                                [self findDog];
+                                [UIView animateWithDuration:0.5 animations:^{
+                                    refreshButton.imageView.transform = CGAffineTransformMakeRotation(0);
+                                    [refreshButton.imageView.layer removeAllAnimations];
+                                } completion:^(BOOL finished) {
+                                    [refreshButton setImage:[UIImage imageNamed:@"location"] forState:UIControlStateNormal];
+                                    
+                                }];
+                                
 
-                            
+                                
                             }
                             if ([stateString intValue] == 404) {
                                 UIAlertView * alert = [[UIAlertView alloc] initWithTitle:BGGetStringWithKeyFromTable(@"The device is not connected", @"BGLanguageSetting")message:nil delegate:self cancelButtonTitle:BGGetStringWithKeyFromTable(@"OK", @"BGLanguageSetting") otherButtonTitles:nil, nil];
-                                [alert show];
+                                NSUserDefaults *userD = [NSUserDefaults standardUserDefaults];
+                                [userD setObject:@"FALSE" forKey:@"contect"];
 
+                                [alert show];
+                                
+                                [UIView animateWithDuration:0.5 animations:^{
+                                    refreshButton.imageView.transform = CGAffineTransformMakeRotation(0);
+                                    [refreshButton.imageView.layer removeAllAnimations];
+                                } completion:^(BOOL finished) {
+                                    [refreshButton setImage:[UIImage imageNamed:@"location"] forState:UIControlStateNormal];
+                                    
+                                }];
+                                
                             }
                             //直接在这边做出判断
                             if ([stateString intValue]==402) {
                                 UIAlertView * alert = [[UIAlertView alloc] initWithTitle:BGGetStringWithKeyFromTable(@"The device is not connected", @"BGLanguageSetting") message:nil delegate:self cancelButtonTitle:BGGetStringWithKeyFromTable(@"OK", @"BGLanguageSetting") otherButtonTitles:nil, nil];
+                                NSUserDefaults *userD = [NSUserDefaults standardUserDefaults];
+
+                                [userD setObject:@"FALSE" forKey:@"contect"];
+
                                 [alert show];
-                                                            }
+                                
+                                [UIView animateWithDuration:0.5 animations:^{
+                                    refreshButton.imageView.transform = CGAffineTransformMakeRotation(0);
+                                    [refreshButton.imageView.layer removeAllAnimations];
+                                } completion:^(BOOL finished) {
+                                    [refreshButton setImage:[UIImage imageNamed:@"location"] forState:UIControlStateNormal];
+                                    
+                                }];
+                            }
                             //直接在这边做出判断
                             if ([stateString intValue]==400) {
                                 NSUserDefaults *userD = [NSUserDefaults standardUserDefaults];
@@ -352,14 +400,30 @@
                             }
                             if ([stateString intValue] == 405) {
                                 UIAlertView * alert = [[UIAlertView alloc] initWithTitle:BGGetStringWithKeyFromTable(@"The device is not connected", @"BGLanguageSetting")  message:nil delegate:self cancelButtonTitle:BGGetStringWithKeyFromTable(@"OK", @"BGLanguageSetting") otherButtonTitles:nil, nil];
+                                NSUserDefaults *userD = [NSUserDefaults standardUserDefaults];
+                                [userD setObject:@"FALSE" forKey:@"contect"];
+
                                 [alert show];
+                                [UIView animateWithDuration:0.5 animations:^{
+                                    refreshButton.imageView.transform = CGAffineTransformMakeRotation(0);
+                                    [refreshButton.imageView.layer removeAllAnimations];
+                                } completion:^(BOOL finished) {
+                                    [refreshButton setImage:[UIImage imageNamed:@"location"] forState:UIControlStateNormal];
+                                    
+                                }];
                                 
                             }if ([stateString intValue] == 411) {
-                                UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"注册超时，请重启设备" message:nil delegate:self cancelButtonTitle:BGGetStringWithKeyFromTable(@"OK", @"BGLanguageSetting") otherButtonTitles:nil, nil];
+                                UIAlertView * alert = [[UIAlertView alloc] initWithTitle:BGGetStringWithKeyFromTable(@"When the registration times out, restart the device", @"BGLanguageSetting") message:nil delegate:self cancelButtonTitle:BGGetStringWithKeyFromTable(@"OK", @"BGLanguageSetting") otherButtonTitles:nil, nil];
                                 [alert show];
                                 
                             }if ([stateString intValue] == 413) {
-                           
+                                [UIView animateWithDuration:0.5 animations:^{
+                                    refreshButton.imageView.transform = CGAffineTransformMakeRotation(0);
+                                    [refreshButton.imageView.layer removeAllAnimations];
+                                } completion:^(BOOL finished) {
+                                    [refreshButton setImage:[UIImage imageNamed:@"location"] forState:UIControlStateNormal];
+                                    
+                                }];
                             }
                             
                             
@@ -371,20 +435,47 @@
                     }
                 }
             }
-            break;
-        case NSStreamEventHasBytesAvailable:
-            NSLog(@"has bytes");
+
             
             break;
         case NSStreamEventHasSpaceAvailable:
             NSLog(@"Stream has space available now");
-            
+        {
+            [UIView animateWithDuration:0.5 animations:^{
+                refreshButton.imageView.transform = CGAffineTransformMakeRotation(0);
+                [refreshButton.imageView.layer removeAllAnimations];
+            } completion:^(BOOL finished) {
+                [refreshButton setImage:[UIImage imageNamed:@"location"] forState:UIControlStateNormal];
+                
+            }];
+        }
             break;
         case NSStreamEventErrorOccurred:
             NSLog(@"Can not connect to the host!");
+        {
+            [UIView animateWithDuration:0.5 animations:^{
+                refreshButton.imageView.transform = CGAffineTransformMakeRotation(0);
+                [refreshButton.imageView.layer removeAllAnimations];
+            } completion:^(BOOL finished) {
+                [refreshButton setImage:[UIImage imageNamed:@"location"] forState:UIControlStateNormal];
+                
+            }];
             
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:BGGetStringWithKeyFromTable(@"The connection failed, please reconnect", @"BGLanguageSetting") message:nil delegate:self cancelButtonTitle:BGGetStringWithKeyFromTable(@"OK", @"BGLanguageSetting") otherButtonTitles:nil, nil];
+            [alert show];
+
+        }
             break;
         case NSStreamEventEndEncountered:
+        {
+            [UIView animateWithDuration:0.5 animations:^{
+                refreshButton.imageView.transform = CGAffineTransformMakeRotation(0);
+                [refreshButton.imageView.layer removeAllAnimations];
+            } completion:^(BOOL finished) {
+                [refreshButton setImage:[UIImage imageNamed:@"location"] forState:UIControlStateNormal];
+                
+            }];
+        }
             break;
         default:
             NSLog(@"Unknown event %lu", (unsigned long)streamEvent);

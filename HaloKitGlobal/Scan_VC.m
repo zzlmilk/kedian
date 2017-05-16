@@ -5,6 +5,7 @@
 #import "UIView+SDExtension.h"
 #import "BGTableBarVc.h"
 #import "JSONKit.h"
+#import "BGLanageTool.h"
 
 static const CGFloat kBorderW = 100;
 static const CGFloat kMargin = 30;
@@ -27,7 +28,9 @@ static const CGFloat kMargin = 30;
 -(void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.hidden=YES;
+    self.navigationController.navigationBar.hidden = YES;
+    self.tabBarController.tabBar.hidden = YES;
+
     [self resumeAnimation];
 
     
@@ -36,7 +39,6 @@ static const CGFloat kMargin = 30;
 -(void)viewWillDisappear:(BOOL)animated{
     
     [super viewDidDisappear:animated];
-    self.navigationController.navigationBar.hidden=NO;
     
 }
 - (void)viewDidLoad {
@@ -69,7 +71,7 @@ static const CGFloat kMargin = 30;
     
     //2.操作提示
     UILabel * tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.sd_height*0.9-kBorderW*2, self.view.bounds.size.width, kBorderW)];
-    tipLabel.text = @"将取景框对准二维码，即可自动扫描";
+    tipLabel.text =BGGetStringWithKeyFromTable(@"Please scan the correct two-dimensional code", @"BGLanguageSetting");
     tipLabel.textColor = [UIColor whiteColor];
     tipLabel.textAlignment = NSTextAlignmentCenter;
     tipLabel.lineBreakMode = NSLineBreakByWordWrapping;

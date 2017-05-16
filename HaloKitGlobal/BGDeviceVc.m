@@ -26,10 +26,15 @@
 #import "GTMBase64.h"
 #import <CommonCrypto/CommonCryptor.h>
 #import "JSONKit.h"
+#import "BGLanageTool.h"
+#import "GeTuiModel.h"
+#import "JSONKit.h"
+#import "NSObject+YYModel.h"
+
 
 #define DESDEVICEID @"deviceId"
 
-@interface BGDeviceVc ()<Scan_VCDelegate,NSStreamDelegate,UINavigationControllerDelegate,BGDeviceSetSecCellDelegate>
+@interface BGDeviceVc ()<NSStreamDelegate,UINavigationControllerDelegate,BGDeviceSetSecCellDelegate, BGDeviceFirstCellDelegate, DeviceVcDelegate>
 
 @end
 
@@ -48,9 +53,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"设置";
-
-    electricity = @"正在获取电量";
+    deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:DESDEVICEID];
+    self.title =  BGGetStringWithKeyFromTable(@"Device" , @"BGLanguageSetting");
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginState:) name:@"loginstate" object:nil];
+    electricity =   BGGetStringWithKeyFromTable(@"Getting" , @"BGLanguageSetting");
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(data:) name:@"postelector" object:nil];
     [self.tableView registerNib:[UINib nibWithNibName:@"BGDeviceFirstCell" bundle:nil] forCellReuseIdentifier:@"BGfirstCell"];
      [self.tableView registerNib:[UINib nibWithNibName:@"BGDeviceSetSecCell" bundle:nil] forCellReuseIdentifier:@"BGSetSecCell"];
@@ -59,6 +65,13 @@
 
 
 }
+
+-(void)loginState:(NSNotification *)center//Please turn on your device and reconnect it on the device page
+{
+    [self.tableView reloadData];
+}
+
+
 
 -(void)data:(NSNotification *)center
 {
@@ -93,17 +106,14 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
         return 3;
-    }else if (section == 1){
-        return 1;
-
     }else{
-        return 3;
+        return 1;
 
     }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return 2;
 }
 
 //初始化socket
@@ -123,6 +133,123 @@
     [outputStream open];
 }
 
+- (void)stream:(NSStream *)theStream handleEvent:(NSStreamEvent)streamEvent {
+    uint8_t buffer[1024];
+    NSInteger len;
+    switch (streamEvent) {
+        case NSStreamEventOpenCompleted:
+            NSLog(@"Stream opened now");
+            break;
+        case NSStreamEventHasBytesAvailable:
+            NSLog(@"has bytes");
+            if (theStream == inputStream) {
+                while ([inputStream hasBytesAvailable]) {
+                    len = [inputStream read:buffer maxLength:sizeof(buffer)];
+                    if (len > 0) {
+                        NSString *output = [[NSString alloc] initWithBytes:buffer length:len encoding:NSUTF8StringEncoding];
+                        if (nil != output) {
+                            GeTuiModel * getModel = [GeTuiModel yy_modelWithJSON:output];
+                            NSString * stateString = [NSString stringWithFormat:@"%@",getModel.state];
+                            NSLog(@"stateStringstateStringstateString:%@", stateString);
+                            int fun = [getModel.servercode intValue];
+                            NSString *msgStr = [NSString stringWithFormat:@"%@",getModel.msg];
+                            if ([stateString intValue] == 200 && fun == 00) {
+                                NSUserDefaults * userD = [NSUserDefaults standardUserDefaults];
+                                [userD setObject:@"TRUE" forKey:@"contect"];
+                                [self.tableView reloadData];
+                                
+                            }
+                            if ([stateString intValue] == 404) {
+                                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@""message:BGGetStringWithKeyFromTable(@"Not connected" , @"BGLanguageSetting")preferredStyle:UIAlertControllerStyleAlert];
+                                
+                                UIAlertAction *UIAlertActionStyleDefaultAction = [UIAlertAction actionWithTitle:@"OK"style: UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                                    
+                                }];
+                                [alertController addAction:UIAlertActionStyleDefaultAction];
+                                [self presentViewController:alertController animated:YES  completion:nil];
+                                
+                                
+                            }
+                            //直接在这边做出判断
+                            if ([stateString intValue]==402) {
+                                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@""message:BGGetStringWithKeyFromTable(@"Not connected" , @"BGLanguageSetting")preferredStyle:UIAlertControllerStyleAlert];
+                                
+                                UIAlertAction *UIAlertActionStyleDefaultAction = [UIAlertAction actionWithTitle:@"OK"style: UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                                    
+                                }];
+                                [alertController addAction:UIAlertActionStyleDefaultAction];
+                                [self presentViewController:alertController animated:YES  completion:nil];
+                            }
+                            //直接在这边做出判断
+                            if ([stateString intValue]==400) {
+                                NSUserDefaults *userD = [NSUserDefaults standardUserDefaults];
+                                [userD setObject:@"FALSE" forKey:@"contect"];
+                                UIAlertView * alert = [[UIAlertView alloc] initWithTitle:msgStr message:nil delegate:self cancelButtonTitle:BGGetStringWithKeyFromTable(@"OK" , @"BGLanguageSetting") otherButtonTitles:nil, nil];
+                                [alert show];
+                            }
+                            if ([stateString intValue] == 405) {
+                                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@""message:BGGetStringWithKeyFromTable(@"Not connected" , @"BGLanguageSetting")preferredStyle:UIAlertControllerStyleAlert];
+                                NSUserDefaults * userD = [NSUserDefaults standardUserDefaults];
+                                [userD setObject:@"FALSE" forKey:@"contect"];
+
+                                UIAlertAction *UIAlertActionStyleDefaultAction = [UIAlertAction actionWithTitle:@"OK"style: UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                                    
+                                }];
+                                [alertController addAction:UIAlertActionStyleDefaultAction];
+                                [self presentViewController:alertController animated:YES  completion:nil];
+                                
+                                
+                            }if ([stateString intValue] == 411) {
+                                
+                                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@""message:BGGetStringWithKeyFromTable(@"When the registration times out, restart the device" , @"BGLanguageSetting")preferredStyle:UIAlertControllerStyleAlert];
+                                NSUserDefaults * userD = [NSUserDefaults standardUserDefaults];
+                                [userD setObject:@"FALSE" forKey:@"contect"];
+
+                                UIAlertAction *UIAlertActionStyleDefaultAction = [UIAlertAction actionWithTitle:@"OK"style: UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                                    
+                                }];
+                                [alertController addAction:UIAlertActionStyleDefaultAction];
+                                [self presentViewController:alertController animated:YES  completion:nil];
+                                
+                                
+                            }if ([stateString intValue] == 413) {
+                            }
+                            
+                            
+                            [theStream close];
+                            [theStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+                            [theStream setDelegate:nil];
+                            NSLog(@"server said: %@", output);
+                        }
+                    }
+                }
+            }
+            
+            break;
+        case NSStreamEventHasSpaceAvailable:
+            NSLog(@"Stream has space available now");
+            
+            break;
+        case NSStreamEventErrorOccurred:
+            NSLog(@"Can not connect to the host!");
+            
+            break;
+        case NSStreamEventEndEncountered:
+            break;
+        default:
+            NSLog(@"Unknown event %lu", (unsigned long)streamEvent);
+            
+    }
+    
+}
+
+
+-(void)scanActionDelegate{
+    [self.tableView reloadData];
+
+}
+
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
@@ -131,97 +258,17 @@
         }else{
             return 44;
         }
-    }else if (indexPath.section == 1){
-        return 44;
-        
-    }else{
+    }else {
         return 44;
         
     }
 }
 
--(void)returnValue:(NSString *)value
-{
-    //需要把返给我的字符串截取一部分
-    [[self class] encryptWithContent:value type:kCCDecrypt key:@"hAlokiTs"];
-    NSUserDefaults *userD = [NSUserDefaults standardUserDefaults];
-    NSString *desStr = [NSString stringWithFormat:@"%@",[userD objectForKey:DESDEVICEID]];
-    if (desStr.length > 6) {
-        deviceId = desStr;
-        [self linkAction];
-    }else{
-        deviceId = @"";
-        
-    }
+-(void)lianjieAct{
+    [self linkAction];
 }
 
-+(NSString *)encryptWithContent:(NSString *)content type:(CCOperation)type key:(NSString *)aKey
-{
-    const char * contentChar =[content UTF8String];
-    char * keyChar =(char*)[aKey UTF8String];
-    const char *miChar;
-    miChar = encryptWithKeyAndType(contentChar, type, keyChar);
-    return  [NSString stringWithCString:miChar encoding:NSUTF8StringEncoding];
-}
 
-static const char* encryptWithKeyAndType(const char *text,CCOperation encryptOperation,char *key)
-{
-    NSString *textString=[[NSString alloc]initWithCString:text encoding:NSUTF8StringEncoding];
-    const void *dataIn;
-    size_t dataInLength;
-    
-    if (encryptOperation == kCCDecrypt)//传递过来的是decrypt 解码
-    {
-        //解码 base64
-        NSData *decryptData = [GTMBase64 decodeData:[textString dataUsingEncoding:NSUTF8StringEncoding]];//转成utf-8并decode
-        dataInLength = [decryptData length];
-        dataIn = [decryptData bytes];
-    }
-    else  //encrypt
-    {
-        NSData* encryptData = [textString dataUsingEncoding:NSUTF8StringEncoding];
-        dataInLength = [encryptData length];
-        dataIn = (const void *)[encryptData bytes];
-    }
-    CCCryptorStatus ccStatus;
-    uint8_t *dataOut = NULL; //可以理解位type/typedef 的缩写（有效的维护了代码，比如：一个人用int，一个人用long。最好用typedef来定义）
-    size_t dataOutAvailable = 0; //size_t  是操作符sizeof返回的结果类型
-    size_t dataOutMoved = 0;
-    dataOutAvailable = (dataInLength + kCCBlockSizeDES) & ~(kCCBlockSizeDES - 1);
-    dataOut = malloc( dataOutAvailable * sizeof(uint8_t));
-    memset((void *)dataOut, 00, dataOutAvailable);//将已开辟内存空间buffer的首 1 个字节的值设为值 0
-    //NSString *initIv = @"12345678";
-    const void *vkey = key;
-    const void *iv = (const void *) key; //[initIv UTF8String];
-    //CCCrypt函数 加密/解密
-    ccStatus = CCCrypt(encryptOperation,//  加密/解密
-                       kCCAlgorithmDES,//  加密根据哪个标准（des，3des，aes。。。。）
-                       kCCOptionPKCS7Padding,//  选项分组密码算法(des:对每块分组加一次密  3DES：对每块分组加三个不同的密)
-                       vkey,  //密钥    加密和解密的密钥必须一致
-                       kCCKeySizeDES,//   DES 密钥的大小（kCCKeySizeDES=8）
-                       iv, //  可选的初始矢量
-                       dataIn, // 数据的存储单元
-                       dataInLength,// 数据的大小
-                       (void *)dataOut,// 用于返回数据
-                       dataOutAvailable,
-                       &dataOutMoved);
-    NSString *result = nil;
-    if (encryptOperation == kCCDecrypt)//encryptOperation==1  解码
-    {
-        //得到解密出来的data数据，改变为utf-8的字符串
-        result = [[NSString alloc] initWithData:[NSData dataWithBytes:(const void *)dataOut length:(NSUInteger)dataOutMoved] encoding:NSUTF8StringEncoding];
-    }
-    else //encryptOperation==0  （加密过程中，把加好密的数据转成base64的）
-    {
-        //编码 base64
-        NSData *data = [NSData dataWithBytes:(const void *)dataOut length:(NSUInteger)dataOutMoved];
-        result = [GTMBase64 stringByEncodingData:data];
-    }
-    NSString *desStr = [NSString stringWithFormat:@"%s",[result UTF8String]];
-    NSUserDefaults *userD = [NSUserDefaults standardUserDefaults];
-    [userD setObject:desStr forKey:DESDEVICEID];/////////////////////861933030001580
-    return [result UTF8String];
-}
 
 
 
@@ -234,13 +281,28 @@ static const char* encryptWithKeyAndType(const char *text,CCOperation encryptOpe
             if (!cell) {
                 cell = [[NSBundle mainBundle] loadNibNamed:@"BGDeviceFirstCell" owner:nil options:nil].lastObject;
             }
+            
+            cell.delegate = self;
+                cell.dianliangLabel.text = BGGetStringWithKeyFromTable(@"Electricity" , @"BGLanguageSetting");
+                cell.shebeihao.text = BGGetStringWithKeyFromTable(@"Device Info" , @"BGLanguageSetting");
+            
+            
             if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"contect"] isEqualToString:@"TRUE"]){
-                cell.stateLabel.text = @"已链接";
-                cell.electricityLabel.text = electricity;
+                cell.stateLabel.text = BGGetStringWithKeyFromTable(@"Connected" , @"BGLanguageSetting");
+                cell.electricityLabel.text = electricity;//Connected
+                cell.stateLabel.hidden = NO;
+                cell.lianjieBtn.hidden = YES;
+                cell.electricityLabel.hidden = NO;
+                cell.dianliangLabel.hidden = NO;
+                NSLog(@"dianliangLabeldianliangLabel:%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"contect"] );
 
             }else{
-                cell.stateLabel.text = @"未链接";
-                cell.electricityLabel = 0;
+                [cell.lianjieBtn setTitle:BGGetStringWithKeyFromTable(@"Unconnect" , @"BGLanguageSetting")  forState:UIControlStateNormal];
+                cell.stateLabel.hidden = YES;
+                cell.lianjieBtn.hidden = NO;
+                cell.electricityLabel.hidden = YES;
+                cell.dianliangLabel.hidden = YES;
+                NSLog(@"dianliangLabeldianliangLabel:%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"contect"] );
             }
             
             cell.deviceNumLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceId"];
@@ -255,7 +317,7 @@ static const char* encryptWithKeyAndType(const char *text,CCOperation encryptOpe
             cell.moreImg.hidden = NO;
             cell.lanuageLabel.hidden = YES;
             cell.img.image = [UIImage imageNamed:@"linkDevice"];
-            cell.titleLabel.text = @"链接其他设备";
+            cell.titleLabel.text = BGGetStringWithKeyFromTable(@"Connect to other devices" , @"BGLanguageSetting");
 
             return cell;
         }else{
@@ -265,7 +327,7 @@ static const char* encryptWithKeyAndType(const char *text,CCOperation encryptOpe
             if (!cell) {
                 cell = [[NSBundle mainBundle] loadNibNamed:@"BGDeviceSetSecCell" owner:nil options:nil].lastObject;
             }
-            cell.titleLabel.text = @"灯光控制";
+            cell.titleLabel.text = BGGetStringWithKeyFromTable(@"Lighting control" , @"BGLanguageSetting");
             if (IsOpen) {
                 [cell.lighterLabel setOn:YES];
                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isOpen"];
@@ -279,43 +341,44 @@ static const char* encryptWithKeyAndType(const char *text,CCOperation encryptOpe
             return cell;
         }
         
-    }else if (indexPath.section == 1){
+    }else {
         BGDeviceSetThreCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BGSetThreCell"];
         if (!cell) {
             cell = [[NSBundle mainBundle] loadNibNamed:@"BGDeviceSetThreCell" owner:nil options:nil].lastObject;
         }
-        cell.moreImg.hidden = YES;
-        cell.lanuageLabel.hidden = NO;
-        cell.titleLabel.text = @"语言选择";
-
-        return cell;
-
-    }else{
-        BGDeviceSetThreCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BGSetThreCell"];
-        if (!cell) {
-            cell = [[NSBundle mainBundle] loadNibNamed:@"BGDeviceSetThreCell" owner:nil options:nil].lastObject;
-        }
-        
-        if (indexPath.row == 0) {
-            cell.img.image = [UIImage imageNamed:@"feedBack"];
-            cell.titleLabel.text = @"意见反馈";
-
-        }else if (indexPath.row == 1){
-            cell.img.image = [UIImage imageNamed:@"center_version"];
-            cell.titleLabel.text = @"帮助中心";
-
-        }else{
-            cell.img.image = [UIImage imageNamed:@"aboutus"];
-            cell.titleLabel.text = @"关于我们";
-
-        }
-        
         cell.moreImg.hidden = NO;
-        cell.lanuageLabel.hidden = YES;
-
+        cell.lanuageLabel.hidden = NO;
+        cell.titleLabel.text = BGGetStringWithKeyFromTable(@"LanageSetting" , @"BGLanguageSetting");
         return cell;
+
     }
 
+    
+//    else{
+//        BGDeviceSetThreCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BGSetThreCell"];
+//        if (!cell) {
+//            cell = [[NSBundle mainBundle] loadNibNamed:@"BGDeviceSetThreCell" owner:nil options:nil].lastObject;
+//        }
+//        
+//        if (indexPath.row == 0) {
+//            cell.img.image = [UIImage imageNamed:@"feedBack"];
+//            cell.titleLabel.text = BGGetStringWithKeyFromTable(@"Feedback" , @"BGLanguageSetting");
+//
+//        }else if (indexPath.row == 1){
+//            cell.img.image = [UIImage imageNamed:@"center_version"];
+//            cell.titleLabel.text = BGGetStringWithKeyFromTable(@"Help center" , @"BGLanguageSetting");
+//
+//        }else{
+//            cell.img.image = [UIImage imageNamed:@"aboutus"];
+//            cell.titleLabel.text = BGGetStringWithKeyFromTable(@"About us" , @"BGLanguageSetting");
+//
+//        }
+//        
+//        cell.moreImg.hidden = NO;
+//        cell.lanuageLabel.hidden = YES;
+//
+//        return cell;
+//    }
     
 }
 
@@ -329,10 +392,10 @@ static const char* encryptWithKeyAndType(const char *text,CCOperation encryptOpe
 
             
         }else if (indexPath.row == 1){
-            vc = [[Scan_VC alloc]init];
-            vc.delegate = self;
-            [self.navigationController pushViewController:vc animated:YES];
-
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            DeviceVc *deviceVc = [storyboard instantiateViewControllerWithIdentifier:@"DeviceVc"];
+            deviceVc.delegate = self;
+            [self.navigationController pushViewController:deviceVc animated:YES];
             
         }else{//BGLighterVc
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -372,21 +435,27 @@ static const char* encryptWithKeyAndType(const char *text,CCOperation encryptOpe
 
 - (void)linkAction {
     [self initNetworkCommunication];
-    NSLog(@"deviceIddeviceId:%@", deviceId);
-    NSString *clientid = [[NSUserDefaults standardUserDefaults]objectForKey:@"clientId"];
-    NSDictionary * dict = @{@"deviceid":@"861933030001580",@"func":@"00",@"clientid":clientid};
-    NSString * response = [dict JSONString];
     NSUserDefaults *userD = [NSUserDefaults standardUserDefaults];
-    [userD setObject:@"861933030001580" forKey:DESDEVICEID];
+    NSLog(@"deviceIddeviceId3:%@", deviceId);
+    NSString *clientid = [[NSUserDefaults standardUserDefaults]objectForKey:@"clientId"];
+    NSLog(@"[userD objectForKey:DESDEVICEID]:%@", [userD objectForKey:DESDEVICEID]);
+    NSDictionary * dict = @{@"deviceid":[userD objectForKey:DESDEVICEID],@"func":@"00",@"clientid":clientid};
+    NSString * response = [dict JSONString];
     NSData * data = [[NSData alloc] initWithData:[response dataUsingEncoding:NSASCIIStringEncoding]];
     [outputStream write:[data bytes] maxLength:[data length]];
-    
 }
 
 -(void)lighterOpen:(BOOL)isOpen{
     if (isOpen) {
         [self lighterSeting:@"7"];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isOpen"];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isWirte"];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isRed"];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isBlue"];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isGreen"];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isCyan"];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isYellow"];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"ispurple"];
 
     }else{
     
@@ -401,11 +470,11 @@ static const char* encryptWithKeyAndType(const char *text,CCOperation encryptOpe
 -(void)lighterSeting:(NSString *)lighter
 {
     [self initNetworkCommunication];
-    NSDictionary *dict = @{@"deviceid":@"861933030001580",@"func":@"06",@"content":lighter, @"language":@"en"};
+    NSUserDefaults* userD = [NSUserDefaults standardUserDefaults];
+    NSDictionary *dict = @{@"deviceid":[userD objectForKey:DESDEVICEID],@"func":@"06",@"content":lighter, @"language":@"en"};
     NSString * response = [dict JSONString];
     NSData * data = [[NSData alloc] initWithData:[response dataUsingEncoding:NSASCIIStringEncoding]];
     [outputStream write:(Byte *)[data bytes] maxLength:[data length]];
-    
 }
 
 

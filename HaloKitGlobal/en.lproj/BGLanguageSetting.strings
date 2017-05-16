@@ -7,9 +7,8 @@
 */
 
 "Map" = "Map";
-"trajectory" = "trajectory";
 "Setting" = "Setting";
-"HomePage" = "HomePage";
+"Home" = "Home";
 "Scan" = "Scan";
 "Link" = "Link";
 "Skip" = "Skip";
@@ -19,8 +18,18 @@
 "Place the two-dimensional code on the collar's instruction manual into the box" = "Place the two-dimensional code on the collar's instruction manual into the box";
 "Google Map" = "Google Map";
 "Find" = "Find";
+"Unconnect" = "Unconnect";
+
 "Monitor" = "Monitor";
+"When the registration times out, restart the device" = "When the registration times out, restart the device";
 "Device" = "Device";
+"Please turn on your device and reconnect it on the device page" = "Please turn on your device and reconnect it on the device page";
+"Device does not have permission to open the album, please go to the phone settings open" = "Device does not have permission to open the album, please go to the phone settings open";
+"Create an electronic fence successfully" = "Create an electronic fence successfully";
+"Remove the electronic fence successfully" = "Remove the electronic fence successfully";
+"The electronic fence already exists" = "The electronic fence already exists";
+"No electronic fence has been created" = "No electronic fence has been created";
+
 "Electricity" = "Electricity";
 "Not connected" = "Not connected";
 "Connected" = "Connected";
@@ -29,7 +38,7 @@
 "Connect to other devices" = "Connect to other devices";
 "Help center" = "Help center";
 "About us" = "About us";
-"Device information" = "Device information";
+"Device info" = "Device Info:";
 "Save" = "Save";
 "Device two-dimensional code" = "Device two-dimensional code";
 "White" = "White";
@@ -37,11 +46,13 @@
 "Blue" = "Blue";
 "Green" = "Green";
 "Cyan" = "Cyan";
+"Purple" = "Purple";
+
 "Yellow" = "Yellow";
 "Feedback" = "Feedback";
 "Questions and opinions" = "Questions and opinions";
 "Please fill in your suggestions or problems" = "Please fill in your suggestions or problems";
-"Contact number" = "Contact number";
+"Contact number" = "PhoneNum";
 "Optional, so that we can contact you" = "Optional, so that we can contact you";
 "Submit" = "Submit";
 "Submitted successfully" = "Submitted successfully";

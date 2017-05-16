@@ -20,6 +20,7 @@
 #import "BGSocketClass.h"
 #import "AppDelegate.h"
 #import "UIViewController+PopMessage.h"
+#import "BGLanageTool.h"
 
 #define DESDEVICEID @"deviceId"
 @interface DeviceVc ()<Scan_VCDelegate,NSStreamDelegate,UINavigationControllerDelegate>
@@ -43,7 +44,8 @@
     _codeLabel.layer.cornerRadius = 15;
     _codeLabel.layer.masksToBounds = YES;
     
-    
+    _linkBtn.layer.cornerRadius = 15;
+    _linkBtn.layer.masksToBounds = YES;
     NSString *scan = BGGetStringWithKeyFromTable(@"Scan",  @"BGLanguageSetting");
 
     
@@ -69,6 +71,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden=YES;
     self.navigationController.navigationBarHidden = YES;
 }
 
@@ -79,6 +82,7 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    self.tabBarController.tabBar.hidden=NO;
     self.navigationController.navigationBarHidden = NO;
     
 }
@@ -91,9 +95,10 @@
     NSUserDefaults *userD = [NSUserDefaults standardUserDefaults];
     NSString *desStr = [NSString stringWithFormat:@"%@",[userD objectForKey:DESDEVICEID]];
     if (desStr.length > 6) {
-        self.codeLabel.text = desStr;
         deviceId = desStr;
-        [self linkAction];
+        [userD setObject:deviceId forKey:DESDEVICEID];
+        self.linkBtn.backgroundColor = [UIColor colorWithRed:94/225.0 green:64/255.0 blue:52/255.0 alpha:1.0];
+        
     }else{
         deviceId = @"";
         
@@ -182,12 +187,12 @@ static const char* encryptWithKeyAndType(const char *text,CCOperation encryptOpe
 
 - (void)linkAction {
     [self initNetworkCommunication];
-    NSLog(@"deviceIddeviceId:%@", deviceId);
+    NSLog(@"deviceIddeviceId1:%@", deviceId);
+    NSUserDefaults* userD = [NSUserDefaults standardUserDefaults];
+
     NSString *clientid = [[NSUserDefaults standardUserDefaults]objectForKey:@"clientId"];
-    NSDictionary * dict = @{@"deviceid":@"861933030001580",@"func":@"00",@"clientid":clientid};
+    NSDictionary * dict = @{@"deviceid":[userD objectForKey:@"deviceId"],@"func":@"00",@"clientid":clientid};
     NSString * response = [dict JSONString];
-    NSUserDefaults *userD = [NSUserDefaults standardUserDefaults];
-    [userD setObject:@"861933030001580" forKey:DESDEVICEID];
     NSData * data = [[NSData alloc] initWithData:[response dataUsingEncoding:NSASCIIStringEncoding]];
     [outputStream write:[data bytes] maxLength:[data length]];
     
@@ -235,12 +240,15 @@ static const char* encryptWithKeyAndType(const char *text,CCOperation encryptOpe
                             NSString * stateString = [NSString stringWithFormat:@"%@",getModel.state];
                             int fun = [getModel.servercode intValue];
                             NSLog(@"GeTuiModelGeTuiModelGeTuiModel:%@", stateString);
-                            if ([stateString intValue] == 200 && fun == 00) {
-                                [self popFailureShow:@"项圈已链接"];
+                            if ([stateString intValue] == 200 && fun == 00) {//Connected
+                                [self popFailureShow:BGGetStringWithKeyFromTable(@"Connected", @"BGLanguageSetting")];
                                 [[NSUserDefaults standardUserDefaults] setObject:@"TRUE" forKey:@"contect"];
+                                [self.delegate scanActionDelegate];
+                                [self.navigationController popViewControllerAnimated:YES];
+
                             }
                             if ([stateString intValue] == 404) {//项圈未连接
-                                [self popFailureShow:@"项圈未链接"];
+                                [self popFailureShow:BGGetStringWithKeyFromTable(@"Not connected", @"BGLanguageSetting")];
                                 [[NSUserDefaults standardUserDefaults] setObject:@"FALSE" forKey:@"contect"];
 
                             }
@@ -256,10 +264,12 @@ static const char* encryptWithKeyAndType(const char *text,CCOperation encryptOpe
                                 [[NSUserDefaults standardUserDefaults] setObject:@"FALSE" forKey:@"contect"];
 
                             }if ([stateString intValue] == 411) {//注册超时，请重启项圈
-                                
+                                [[NSUserDefaults standardUserDefaults] setObject:@"FALSE" forKey:@"contect"];
+
                                 
                             }if ([stateString intValue] == 413) {//该设备已经被注册，请先解绑"
-                                
+                                [[NSUserDefaults standardUserDefaults] setObject:@"FALSE" forKey:@"contect"];
+
                             }
                             
                             [theStream close];
@@ -300,4 +310,10 @@ static const char* encryptWithKeyAndType(const char *text,CCOperation encryptOpe
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (IBAction)linkAct:(id)sender {
+    [self linkAction];
+
+    
+
+}
 @end

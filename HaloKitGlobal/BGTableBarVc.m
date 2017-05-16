@@ -9,7 +9,8 @@
 #import "BGTableBarVc.h"
 #import "BGLanageTool.h"
 #import <AudioToolbox/AudioToolbox.h>
-
+#import "BGLanageTool.h"
+#import "LinkDeviceVc.h"
 #import "UIViewController+PopMessage.h"
 @interface BGTableBarVc ()
 
@@ -19,6 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginState:) name:@"loginstate" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(offLineState:) name:@"AppOffLine" object:nil];
@@ -31,8 +33,8 @@
     [item setTitleTextAttributes:textAttrs forState:UIControlStateSelected];
     
     NSString *map = BGGetStringWithKeyFromTable(@"Map" , @"BGLanguageSetting");
-    NSString *trajectory = BGGetStringWithKeyFromTable(@"trajectory" , @"BGLanguageSetting");
-    NSString *Setting = BGGetStringWithKeyFromTable(@"Setting" , @"BGLanguageSetting");
+    NSString *trajectory = BGGetStringWithKeyFromTable(@"Monitor" , @"BGLanguageSetting");
+    NSString *Setting = BGGetStringWithKeyFromTable(@"Device" , @"BGLanguageSetting");
     
     //设置底部文字
     NSArray *titleArray = [NSArray arrayWithObjects:map, trajectory, Setting, nil];
@@ -53,10 +55,10 @@
     
 }
 
--(void)loginState:(NSNotification *)center
+-(void)loginState:(NSNotification *)center//Please turn on your device and reconnect it on the device page
 {
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"App端未连接设备,请在设置中重连"  preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:BGGetStringWithKeyFromTable(@"Please turn on your device and reconnect it on the device page", @"BGLanguageSetting")  preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:BGGetStringWithKeyFromTable(@"OK", @"BGLanguageSetting")  style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     }]];
     
@@ -66,15 +68,15 @@
 
 
 //接收报警的个推
--(void)state:(NSNotification *)center
+-(void)state:(NSNotification *)center//Make sure to close the electronic fence
 {
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-    [self popSuccessShow:@"您的狗狗已经跑出围栏了" afterDelay:1.5];
+    [self popSuccessShow: BGGetStringWithKeyFromTable(@"Make sure to close the electronic fence" , @"BGLanguageSetting") afterDelay:1.5];
 }
 
 -(void)offLineState:(NSNotification *)center
 {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"App端未连接设备,请在设置中重连"  preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:BGGetStringWithKeyFromTable(@"Please turn on your device and reconnect it on the device page", @"BGLanguageSetting")  preferredStyle:UIAlertControllerStyleAlert];
     
     [alert addAction:[UIAlertAction actionWithTitle:BGGetStringWithKeyFromTable(@"Not connected", @"BGLanguageSetting")  style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     }]];

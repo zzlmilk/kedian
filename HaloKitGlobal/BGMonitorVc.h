@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface BGMonitorVc : UIViewController
+@property (weak, nonatomic) IBOutlet UIButton *guijiBtn;
+@property (weak, nonatomic) IBOutlet UIButton *weilanBtn;
 
 @end

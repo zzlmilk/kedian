@@ -7,7 +7,7 @@
 //
 
 #import "BGMonitorVc.h"
-
+#import "BGLanageTool.h"
 @interface BGMonitorVc ()
 
 @end
@@ -16,7 +16,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.title = BGGetStringWithKeyFromTable(@"Monitor" , @"BGLanguageSetting");
+    [self.guijiBtn setTitle:BGGetStringWithKeyFromTable(@"Pets 24 hours trajectory" , @"BGLanguageSetting") forState:UIControlStateNormal];
+    [self.weilanBtn setTitle:BGGetStringWithKeyFromTable(@"Create an electronic fence", @"BGLanguageSetting") forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -6,9 +6,8 @@
   Copyright © 2017年 范博. All rights reserved.
 */
 "Map" = "地图";
-"trajectory" = "轨迹";
 "Setting" = "设置";
-"HomePage" = "首页";
+"Home" = "首页";
 "Scan" = "扫描二维码";
 "Link" = "链接";
 "Skip" = "跳过";
@@ -16,10 +15,18 @@
 "lightSetting" = "灯光控制";
 "Please scan the correct two-dimensional code" = "请扫描正确的二维码";
 "Place the two-dimensional code on the collar's instruction manual into the box" = "将项圈设备使用说明书上的二维码放入框内";
+"When the registration times out, restart the device" = "注册超时，请重启设备";
 "Google Map" = "谷歌地图";
+"Please turn on your device and reconnect it on the device page" = "请开启您的设备，在设备页进行重连";
 "Find" = "查找";
+"Unconnect" = "未连接";
+"Create an electronic fence successfully" = "创建电子围栏成功";
 "Monitor" = "监控";
+"Remove the electronic fence successfully" = "移除电子围栏成功";
+"The electronic fence already exists" = "电子围栏已存在";
 "Device" = "设备";
+"No electronic fence has been created" = "还未创建电子围栏";
+"Device does not have permission to open the album, please go to the phone settings open" = "设备未开启相册权限，请前往手机设置开启";
 "Electricity" = "电量";
 "Not connected" = "未连接";
 "Connected" = "已连接";
@@ -29,7 +36,7 @@
 "Help center" = "帮助中心";
 "About us" = "关于我们";
 "Feedback" = "意见反馈";
-"Device information" = "设备信息";
+"Device Info" = "设备信息:";
 "Save" = "保存";
 "Device two-dimensional code" = "设备二维码";
 "White" = "白色";
@@ -41,8 +48,9 @@
 "Questions and opinions" = "问题与意见";
 "Please fill in your suggestions or problems" = "请填写您的建议或遇到的问题";
 "Contact number" = "联系电话";
+"Purple" = "紫色";
 "Optional, so that we can contact you" = "选填，便于我们与你联系";
-"Submit" = "提交";
+"Submit" = "提  交";
 "Submitted successfully" = "提交成功";
 "HALOKIT 可点" = "HALOKIT 可点";
 "Customer service hotline" = "客服热线";
