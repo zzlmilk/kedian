@@ -1,0 +1,81 @@
+
+/* Class = "UILabel"; text = "Hotline"; ObjectID = "AwT-mF-Vzb"; */
+"AwT-mF-Vzb.text" = "Hotline";
+
+/* Class = "UILabel"; text = "青色"; ObjectID = "CSh-AY-g4a"; */
+"CSh-AY-g4a.text" = "青色";
+
+/* Class = "UIButton"; normalTitle = "Scan"; ObjectID = "GC2-nJ-URo"; */
+"GC2-nJ-URo.normalTitle" = "Scan";
+
+/* Class = "UINavigationItem"; title = "HomePage"; ObjectID = "M4T-cw-e74"; */
+"M4T-cw-e74.title" = "HomePage";
+
+/* Class = "UINavigationItem"; title = "AboutUs"; ObjectID = "M69-yV-qOD"; */
+"M69-yV-qOD.title" = "AboutUs";
+
+/* Class = "UINavigationItem"; title = "Device"; ObjectID = "MRF-Mg-xxe"; */
+"MRF-Mg-xxe.title" = "Device";
+
+/* Class = "UITabBarItem"; title = "Map"; ObjectID = "Qzg-DM-ODp"; */
+"Qzg-DM-ODp.title" = "Map";
+
+/* Class = "UITabBarItem"; title = "Trajectory"; ObjectID = "SY7-F3-iO4"; */
+"SY7-F3-iO4.title" = "Trajectory";
+
+/* Class = "UIButton"; normalTitle = "Scan"; ObjectID = "SmA-S5-4xE"; */
+"SmA-S5-4xE.normalTitle" = "Scan";
+
+/* Class = "UIButton"; normalTitle = "400-775-9206"; ObjectID = "WKi-rX-kkQ"; */
+"WKi-rX-kkQ.normalTitle" = "400-775-9206";
+
+/* Class = "UILabel"; text = "Halo即是光芒，是可以汇成圆环的光芒，"; ObjectID = "aLS-Zm-CXs"; */
+"aLS-Zm-CXs.text" = "Halo即是光芒，是可以汇成圆环的光芒，";
+
+/* Class = "UILabel"; text = "设备号："; ObjectID = "aw4-Ja-6Y1"; */
+"aw4-Ja-6Y1.text" = "设备号：";
+
+/* Class = "UILabel"; text = "光芒抚慰心灵；圆环温柔环抱。"; ObjectID = "g39-zZ-5zX"; */
+"g39-zZ-5zX.text" = "光芒抚慰心灵；圆环温柔环抱。";
+
+/* Class = "UIButton"; normalTitle = "LanguageSettings"; ObjectID = "gBS-L6-l3Z"; */
+"gBS-L6-l3Z.normalTitle" = "LanguageSettings";
+
+/* Class = "UINavigationItem"; title = "设备信息"; ObjectID = "gxT-8L-yFC"; */
+"gxT-8L-yFC.title" = "设备信息";
+
+/* Class = "UILabel"; text = "绿色"; ObjectID = "hBW-fg-EoC"; */
+"hBW-fg-EoC.text" = "绿色";
+
+/* Class = "UILabel"; text = "Current version"; ObjectID = "hBq-Mf-eDQ"; */
+"hBq-Mf-eDQ.text" = "Current version";
+
+/* Class = "UINavigationItem"; title = "Lighter"; ObjectID = "kHF-eR-Ye5"; */
+"kHF-eR-Ye5.title" = "Lighter";
+
+/* Class = "UINavigationItem"; title = "HappleCenter"; ObjectID = "lNl-fG-ed8"; */
+"lNl-fG-ed8.title" = "HappleCenter";
+
+/* Class = "UILabel"; text = "蓝色"; ObjectID = "lPR-Kp-vvg"; */
+"lPR-Kp-vvg.text" = "蓝色";
+
+/* Class = "UILabel"; text = "红色"; ObjectID = "mIi-tM-kLY"; */
+"mIi-tM-kLY.text" = "红色";
+
+/* Class = "UIButton"; normalTitle = "V 1.0.0"; ObjectID = "nUT-fd-wpF"; */
+"nUT-fd-wpF.normalTitle" = "V 1.0.0";
+
+/* Class = "UITabBarItem"; title = "Setting"; ObjectID = "rUI-oM-gQq"; */
+"rUI-oM-gQq.title" = "Setting";
+
+/* Class = "UILabel"; text = "黄色"; ObjectID = "uQa-eI-JqA"; */
+"uQa-eI-JqA.text" = "黄色";
+
+/* Class = "UIButton"; normalTitle = "Link"; ObjectID = "waa-4D-2Ab"; */
+"waa-4D-2Ab.normalTitle" = "Link";
+
+/* Class = "UILabel"; text = "设备二维码"; ObjectID = "x5k-aD-cec"; */
+"x5k-aD-cec.text" = "设备二维码";
+
+/* Class = "UILabel"; text = "白色"; ObjectID = "yMS-wA-zC8"; */
+"yMS-wA-zC8.text" = "白色";

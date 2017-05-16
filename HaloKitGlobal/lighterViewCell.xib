@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="RSW-Dh-PAA" customClass="lighterViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RSW-Dh-PAA" id="oez-AY-ydg">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wirte" translatesAutoresizingMaskIntoConstraints="NO" id="vLA-lN-880">
+                        <rect key="frame" x="8" y="10" width="22" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="10I-SO-ddB"/>
+                            <constraint firstAttribute="width" constant="22" id="M5o-nV-zSe"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="白色" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yvG-hd-lsd">
+                        <rect key="frame" x="38" y="14" width="27" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="VmH-fD-Ff0"/>
+                            <constraint firstAttribute="width" constant="27" id="bi6-qh-O5d"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="choosed" translatesAutoresizingMaskIntoConstraints="NO" id="LuU-Dg-r5u">
+                        <rect key="frame" x="297" y="17" width="15" height="9"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="15" id="cid-3H-Qmy"/>
+                            <constraint firstAttribute="height" constant="9" id="pHw-9r-AUS"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="yvG-hd-lsd" firstAttribute="centerY" secondItem="oez-AY-ydg" secondAttribute="centerY" id="CA0-An-yR0"/>
+                    <constraint firstItem="vLA-lN-880" firstAttribute="leading" secondItem="oez-AY-ydg" secondAttribute="leadingMargin" id="FlN-98-Tsk"/>
+                    <constraint firstItem="yvG-hd-lsd" firstAttribute="leading" secondItem="vLA-lN-880" secondAttribute="trailing" constant="8" id="UOu-jb-Wva"/>
+                    <constraint firstItem="LuU-Dg-r5u" firstAttribute="centerY" secondItem="oez-AY-ydg" secondAttribute="centerY" id="hAX-u1-AVP"/>
+                    <constraint firstItem="LuU-Dg-r5u" firstAttribute="trailing" secondItem="oez-AY-ydg" secondAttribute="trailingMargin" id="lO6-Uy-AeZ"/>
+                    <constraint firstItem="vLA-lN-880" firstAttribute="centerY" secondItem="oez-AY-ydg" secondAttribute="centerY" id="oaL-CW-tBv"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="isOpen" destination="LuU-Dg-r5u" id="qYi-wm-7K6"/>
+                <outlet property="yanse" destination="vLA-lN-880" id="ZOT-HM-Otl"/>
+                <outlet property="yanseTitle" destination="yvG-hd-lsd" id="dJ0-BA-j01"/>
+            </connections>
+            <point key="canvasLocation" x="-7" y="19"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="choosed" width="13" height="9"/>
+        <image name="wirte" width="35" height="35"/>
+    </resources>
+</document>

@@ -1,0 +1,27 @@
+
+/* Class = "UIButton"; normalTitle = "链接"; ObjectID = "4Ll-7a-jmS"; */
+"4Ll-7a-jmS.normalTitle" = "链接";
+
+/* Class = "UIButton"; normalTitle = "扫描"; ObjectID = "GC2-nJ-URo"; */
+"GC2-nJ-URo.normalTitle" = "扫描";
+
+/* Class = "UINavigationItem"; title = "Root View Controller"; ObjectID = "MRF-Mg-xxe"; */
+"MRF-Mg-xxe.title" = "Root View Controller";
+
+/* Class = "UITabBarItem"; title = "地图"; ObjectID = "Qzg-DM-ODp"; */
+"Qzg-DM-ODp.title" = "地图";
+
+/* Class = "UITabBarItem"; title = "轨迹"; ObjectID = "SY7-F3-iO4"; */
+"SY7-F3-iO4.title" = "轨迹";
+
+/* Class = "UIButton"; normalTitle = "语言设置"; ObjectID = "gBS-L6-l3Z"; */
+"gBS-L6-l3Z.normalTitle" = "语言设置";
+
+/* Class = "UIButton"; normalTitle = "跳过"; ObjectID = "gI6-Cc-qIa"; */
+"gI6-Cc-qIa.normalTitle" = "跳过";
+
+/* Class = "UINavigationItem"; title = "Root View Controller"; ObjectID = "jhJ-h8-BY0"; */
+"jhJ-h8-BY0.title" = "Root View Controller";
+
+/* Class = "UITabBarItem"; title = "设置"; ObjectID = "rUI-oM-gQq"; */
+"rUI-oM-gQq.title" = "设置";

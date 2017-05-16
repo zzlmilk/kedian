@@ -1,0 +1,30 @@
+
+/* Class = "UIButton"; normalTitle = "Link"; ObjectID = "4Ll-7a-jmS"; */
+"4Ll-7a-jmS.normalTitle" = "Link";
+
+/* Class = "UIButton"; normalTitle = "Scan"; ObjectID = "GC2-nJ-URo"; */
+"GC2-nJ-URo.normalTitle" = "Scan";
+
+/* Class = "UINavigationItem"; title = "HomePage"; ObjectID = "M4T-cw-e74"; */
+"M4T-cw-e74.title" = "HomePage";
+
+/* Class = "UINavigationItem"; title = "Root View Controller"; ObjectID = "MRF-Mg-xxe"; */
+"MRF-Mg-xxe.title" = "Root View Controller";
+
+/* Class = "UITabBarItem"; title = "Map"; ObjectID = "Qzg-DM-ODp"; */
+"Qzg-DM-ODp.title" = "Map";
+
+/* Class = "UITabBarItem"; title = "Trajectory"; ObjectID = "SY7-F3-iO4"; */
+"SY7-F3-iO4.title" = "Trajectory";
+
+/* Class = "UIButton"; normalTitle = "LanguageSettings"; ObjectID = "gBS-L6-l3Z"; */
+"gBS-L6-l3Z.normalTitle" = "LanguageSettings";
+
+/* Class = "UIButton"; normalTitle = "Skip"; ObjectID = "gI6-Cc-qIa"; */
+"gI6-Cc-qIa.normalTitle" = "Skip";
+
+/* Class = "UINavigationItem"; title = "Root View Controller"; ObjectID = "jhJ-h8-BY0"; */
+"jhJ-h8-BY0.title" = "Root View Controller";
+
+/* Class = "UITabBarItem"; title = "Setting"; ObjectID = "rUI-oM-gQq"; */
+"rUI-oM-gQq.title" = "Setting";

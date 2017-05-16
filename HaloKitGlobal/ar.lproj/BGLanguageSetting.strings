@@ -1,0 +1,94 @@
+/* 
+  BGLanguageSetting.strings
+  HaloKitGlobal
+
+  Created by 范博 on 2017/5/2.
+  Copyright © 2017年 范博. All rights reserved.
+*/
+"Map" = "地图";
+"trajectory" = "轨迹";
+"Setting" = "设置";
+"HomePage" = "首页";
+"Scan" = "يرجى تصحيح ثنائي الأبعاد مسح كود";
+"Link" = "الأجهزة المتصلة";
+"Skip" = "跳过";
+"LanageSetting" = "اختيار اللغة";
+"lightSetting" = "التحكم في الإضاءة";
+"Please scan the correct two-dimensional code" = "يرجى تصحيح ثنائي الأبعاد مسح كود";
+"Place the two-dimensional code on the collar's instruction manual into the box" = "رمز ثنائي الأبعاد على ذوي الياقات البيضاء في دليل الإطار المعدات";
+"Google Map" = "خريطة جوجل";
+"Find" = "بحث";
+"Monitor" = "مراقب";
+"Device" = "معدات";
+"Electricity" = "قوة";
+"Not connected" = "لا علاقة";
+"Connected" = "متصل";
+"Getting" = "الحصول على";
+"Lighting control" = "التحكم في الإضاءة";
+"Connect to other devices" = "توصيل أجهزة أخرى";
+"Help center" = "مساعدة";
+"About us" = "من نحن";
+"Device information" = "معلومات الجهاز";
+"Save" = "حفظ";
+"Device two-dimensional code" = "معدات رمز ثنائي الأبعاد";
+"Feedback" = "ردود الفعل";
+"White" = "الأبيض";
+"Red" = "أحمر";
+"Blue" = "أزرق";
+"Green" = "أخضر";
+"Cyan" = "أزرق";
+"Yellow" = "أصفر";
+"Questions and opinions" = "قضايا وآراء";
+"Please fill in your suggestions or problems" = "يرجى ملء في وصف المشكلة التي واجهتك حتى نتمكن من تحسين مساعدة";
+"Contact number" = "هاتف";
+"Optional, so that we can contact you" = "يرجى ملء اقتراحاتكم أو المشاكل التي واجهتها";
+"Submit" = "عرض";
+"Submitted successfully" = "قدمت بنجاح";
+"HALOKIT 可点" = "HALOKIT";
+"Customer service hotline" = "الخط الساخن لخدمة العملاء";
+"Current version" = "الإصدار الحالي";
+"Smart Collar FAQs" = "أسئلة وأجوبة طوق الذكية";
+"Electric fence" = "سياج الكتروني";
+"Pets 24 hours trajectory" = "الحيوانات الأليفة 24H مسار";
+"Create an electronic fence" = "إنشاء سياج الكتروني";
+"Close the electronic fence and your pet is easy to lose" = "مغلق سياج الكتروني، والحيوانات الأليفة الخاص سهلة لانقاص";
+"Create success" = "خلق النجاح";
+"Make sure to close the electronic fence" = "OK لإغلاق سياج الكتروني";
+"Range size" = "مجموعة الحجم";
+"Time" = "وقت";
+"Cancel" = "ألغيت";
+"OK" = "أكد";
+"Close" = "قريب";
+"Open" = "فتح";
+"Turn off" = "غلق";
+"Getting pet location" = "الحصول على موقع الحيوانات الأليفة";
+"Connection succeeded" = "كان الاتصال ناجحا";
+"Please turn on your device" = "يرجى بدوره على جهازك";
+"Saved successfully" = "حفظ بنجاح";
+"Save failed" = "حفظ فشل";
+"Escape fence notice" = "سياج للهروب إشعار";
+"Your pet has left the fence, please open the APP verification" = "وقد ترك محبوبتك السياج، APP مفتوحة تحقق";
+"Your pet has left the fence, please check" = "وقد ترك محبوبتك السياج، الاختيار";
+"Device signal is weak, please try again" = "الإشارات الضعيفة الجهاز، يرجى المحاولة مرة أخرى";
+"Please connect the device first" = "الرجاء توصيل الأجهزة";
+"Get track failed" = "عدم الحصول على مسار";
+"Closed fence failed" = "انهيار سياج الفشل";
+"Failed to create fence" = "فشل إنشاء سياج";
+"please enter a valid phone number" = "يرجى إدخال رقم الهاتف الصحيح";
+"Press again to exit the program" = "اضغط مرة أخرى لإنهاء البرنامج";
+"The device is already landing on another application" = "قد هبطت المعدات بالفعل في تطبيق آخر";
+"AGPS failed to get" = "فشل الاستحواذ AGPS";
+"The equipment is offline" = "الجهاز غير متواجد حاليا";
+"The pet is out of the fence" = "الحيوانات الأليفة تسوير";
+"The device is not connected" = "لم يتم توصيل الأجهزة الطرفية";
+"The device is disconnected" = "يتم قطع الجهاز";
+"Update failed" = "تحديث فشل";
+"Longitude error" = "خطأ خط الطول";
+"Latitude error" = "خطأ خط العرض";
+"Radius error" = "خطأ دائرة نصف قطرها";
+"Can not connect to the network Please try again later" = "غير قادر على الاتصال بالشبكة، يرجى المحاولة مرة أخرى في وقت لاحق";
+"The connection failed, please reconnect" = "اتصال فشل، إعادة الاتصال";
+"Load failed, please reload" = "فشل تحميل، تحميل";
+"The network can not be accessed, please check the network connection" = "لا يمكن الوصول إلى الشبكة، يرجى التحقق من الاتصال بالشبكة";
+"The device signal is weak" = "إشارة المعدات ضعيفة";
+

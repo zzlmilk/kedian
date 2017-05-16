@@ -1,0 +1,95 @@
+/* 
+  BGLanguageSetting.strings
+  HaloKitGlobal
+
+  Created by 范博 on 2017/5/2.
+  Copyright © 2017年 范博. All rights reserved.
+*/
+"Map" = "地图";
+"trajectory" = "轨迹";
+"Setting" = "设置";
+"HomePage" = "首页";
+"Scan" = "扫描二维码";
+"Link" = "链接";
+"Skip" = "跳过";
+"LanageSetting" = "选择语言";
+"lightSetting" = "灯光控制";
+"Please scan the correct two-dimensional code" = "请扫描正确的二维码";
+"Place the two-dimensional code on the collar's instruction manual into the box" = "将项圈设备使用说明书上的二维码放入框内";
+"Google Map" = "谷歌地图";
+"Find" = "查找";
+"Monitor" = "监控";
+"Device" = "设备";
+"Electricity" = "电量";
+"Not connected" = "未连接";
+"Connected" = "已连接";
+"Getting" = "获取中";
+"Lighting control" = "灯光控制";
+"Connect to other devices" = "连接其它设备";
+"Help center" = "帮助中心";
+"About us" = "关于我们";
+"Feedback" = "意见反馈";
+"Device information" = "设备信息";
+"Save" = "保存";
+"Device two-dimensional code" = "设备二维码";
+"White" = "白色";
+"Red" = "红色";
+"Blue" = "蓝色";
+"Green" = "绿色";
+"Cyan" = "青色";
+"Yellow" = "黄色";
+"Questions and opinions" = "问题与意见";
+"Please fill in your suggestions or problems" = "请填写您的建议或遇到的问题";
+"Contact number" = "联系电话";
+"Optional, so that we can contact you" = "选填，便于我们与你联系";
+"Submit" = "提交";
+"Submitted successfully" = "提交成功";
+"HALOKIT 可点" = "HALOKIT 可点";
+"Customer service hotline" = "客服热线";
+"Current version" = "当前版本";
+"Smart Collar FAQs" = "可点智能项圈FAQs";
+"Electric fence" = "电子围栏";
+"Pets 24 hours trajectory" = "宠物24h轨迹";
+"Create an electronic fence" = "创建电子围栏";
+"Close the electronic fence and your pet is easy to lose" = "关闭电子围栏，您的宠物容易丢失";
+"Create success" = "创建成功";
+"Make sure to close the electronic fence" = "确认关闭电子围栏";
+"Range size" = "范围大小";
+"Time" = "时间";
+"Cancel" = "取消";
+"OK" = "确认";
+"Close" = "关闭";
+"Open" = "开";
+"Turn off" = "关";
+"Getting pet location" = "正在获取宠物位置";
+"Connection succeeded" = "连接成功";
+"Please turn on your device" = "请开启您的设备";
+"Saved successfully" = "保存成功";
+"Save failed" = "保存失败";
+"Escape fence notice" = "逃离围栏通知";
+"Your pet has left the fence, please open the APP verification" = "你的宠物已经离开围栏，请打开APP核实";
+"Your pet has left the fence, please check" = "你的宠物已经离开围栏，请核实";
+"Device signal is weak, please try again" = "设备信号弱，请重试";
+"Please connect the device first" = "请先连接设备";
+"Get track failed" = "获取轨迹失败";
+"Closed fence failed" = "关闭围栏失败";
+"Failed to create fence" = "创建围栏失败";
+"please enter a valid phone number" = "请输入正确的手机号";
+"Press again to exit the program" = "再按一次退出程序";
+"The device is already landing on another application" = "设备已在另一台应用登陆";
+"AGPS failed to get" = "AGPS获取失败";
+"The equipment is offline" = "设备离线";
+"The pet is out of the fence" = "宠物脱离围栏";
+"The device is not connected" = "设备端未连接";
+"The device is disconnected" = "设备断开连接";
+"Update failed" = "更新失败";
+"Longitude error" = "经度错误";
+"Latitude error" = "纬度错误";
+"Radius error" = "半径错误";
+"Can not connect to the network Please try again later" = "无法连接到网络请稍后再试";
+"The connection failed, please reconnect" = "连接失败，请重新连接";
+"Load failed, please reload" = "加载失败，请重新加载";
+"The network can not be accessed, please check the network connection" = "网络无法访问，请检查网络连接";
+"The device signal is weak" = "设备信号较弱";
+
+

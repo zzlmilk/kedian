@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="44" id="9Xy-Tt-9VQ" userLabel="Table View Cell" customClass="BGDeviceSetSecCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9Xy-Tt-9VQ" id="Wmh-eW-CXm">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lighter_controller" translatesAutoresizingMaskIntoConstraints="NO" id="Tro-J0-gbS">
+                        <rect key="frame" x="8" y="8" width="27" height="27"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="27" id="qrT-bz-IO4"/>
+                            <constraint firstAttribute="height" constant="27" id="szv-Nm-n9f"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lighter controlling" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LET-d3-LA8">
+                        <rect key="frame" x="43" y="11" width="136" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="hah-3I-TlT"/>
+                            <constraint firstAttribute="width" constant="136" id="hjo-KH-hPk"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="more" translatesAutoresizingMaskIntoConstraints="NO" id="aJN-b5-cGf">
+                        <rect key="frame" x="296" y="10" width="16" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="Hrj-ok-dTx"/>
+                            <constraint firstAttribute="width" constant="16" id="SO1-uO-Exp"/>
+                        </constraints>
+                    </imageView>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="nvE-AJ-aS6">
+                        <rect key="frame" x="216" y="7" width="51" height="31"/>
+                        <connections>
+                            <action selector="lighterOpenAction:" destination="9Xy-Tt-9VQ" eventType="valueChanged" id="NG8-rF-SK8"/>
+                        </connections>
+                    </switch>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="Tro-J0-gbS" secondAttribute="bottom" constant="8.5" id="0LC-mf-Mft"/>
+                    <constraint firstItem="aJN-b5-cGf" firstAttribute="leading" secondItem="nvE-AJ-aS6" secondAttribute="trailing" constant="31" id="3eJ-bh-NSV"/>
+                    <constraint firstItem="nvE-AJ-aS6" firstAttribute="centerY" secondItem="Wmh-eW-CXm" secondAttribute="centerY" id="59o-Cd-6NM"/>
+                    <constraint firstItem="LET-d3-LA8" firstAttribute="top" secondItem="Wmh-eW-CXm" secondAttribute="topMargin" constant="3" id="ATd-vn-1Et"/>
+                    <constraint firstItem="Tro-J0-gbS" firstAttribute="leading" secondItem="Wmh-eW-CXm" secondAttribute="leading" constant="8" id="E9u-wb-7HZ"/>
+                    <constraint firstItem="LET-d3-LA8" firstAttribute="leading" secondItem="Tro-J0-gbS" secondAttribute="trailing" constant="8" id="Gj1-l9-f9M"/>
+                    <constraint firstItem="Tro-J0-gbS" firstAttribute="top" secondItem="Wmh-eW-CXm" secondAttribute="top" constant="8" id="MSe-XZ-iut"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="LET-d3-LA8" secondAttribute="bottom" constant="3" id="bQs-25-3Nv"/>
+                    <constraint firstAttribute="trailing" secondItem="aJN-b5-cGf" secondAttribute="trailing" constant="8" id="hQW-Dh-ZfI"/>
+                    <constraint firstItem="aJN-b5-cGf" firstAttribute="centerY" secondItem="Wmh-eW-CXm" secondAttribute="centerY" id="kn0-UO-ujK"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="lighterLabel" destination="nvE-AJ-aS6" id="fYl-ew-FXq"/>
+                <outlet property="titleLabel" destination="LET-d3-LA8" id="lPa-9g-edB"/>
+            </connections>
+            <point key="canvasLocation" x="-172" y="-61"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="lighter_controller" width="20" height="20"/>
+        <image name="more" width="7" height="11"/>
+    </resources>
+</document>

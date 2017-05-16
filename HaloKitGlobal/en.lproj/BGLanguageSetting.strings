@@ -1,0 +1,94 @@
+/* 
+  BGLanguageSetting.strings
+  HaloKitGlobal
+
+  Created by 范博 on 2017/5/2.
+  Copyright © 2017年 范博. All rights reserved.
+*/
+
+"Map" = "Map";
+"trajectory" = "trajectory";
+"Setting" = "Setting";
+"HomePage" = "HomePage";
+"Scan" = "Scan";
+"Link" = "Link";
+"Skip" = "Skip";
+"LanageSetting" = "LanageSetting";
+"ununited" = "ununited";
+"Please scan the correct two-dimensional code" = "Please scan the correct two-dimensional code";
+"Place the two-dimensional code on the collar's instruction manual into the box" = "Place the two-dimensional code on the collar's instruction manual into the box";
+"Google Map" = "Google Map";
+"Find" = "Find";
+"Monitor" = "Monitor";
+"Device" = "Device";
+"Electricity" = "Electricity";
+"Not connected" = "Not connected";
+"Connected" = "Connected";
+"Getting" = "Getting";
+"lightSetting" = "lightSetting";
+"Connect to other devices" = "Connect to other devices";
+"Help center" = "Help center";
+"About us" = "About us";
+"Device information" = "Device information";
+"Save" = "Save";
+"Device two-dimensional code" = "Device two-dimensional code";
+"White" = "White";
+"Red" = "Red";
+"Blue" = "Blue";
+"Green" = "Green";
+"Cyan" = "Cyan";
+"Yellow" = "Yellow";
+"Feedback" = "Feedback";
+"Questions and opinions" = "Questions and opinions";
+"Please fill in your suggestions or problems" = "Please fill in your suggestions or problems";
+"Contact number" = "Contact number";
+"Optional, so that we can contact you" = "Optional, so that we can contact you";
+"Submit" = "Submit";
+"Submitted successfully" = "Submitted successfully";
+"HALOKIT 可点" = "HALOKIT";
+"Customer service hotline" = "Customer service hotline";
+"Current version" = "Current version";
+"Smart Collar FAQs" = "Smart Collar FAQs";
+"Electric fence" = "Electric fence";
+"Pets 24 hours trajectory" = "Pets 24 hours trajectory";
+"Create an electronic fence" = "Create an electronic fence";
+"Close the electronic fence and your pet is easy to lose" = "Close the electronic fence and your pet is easy to lose";
+"Create success" = "Create success";
+"Make sure to close the electronic fence" = "Make sure to close the electronic fence";
+"Range size" = "Range size";
+"Time" = "Time";
+"Cancel" = "Cancel";
+"OK" = "OK";
+"Close" = "Close";
+"Open" = "Open";
+"Turn off" = "Turn off";
+"Getting pet location" = "Getting pet location";
+"Connection succeeded" = "Connection succeeded";
+"Please turn on your device" = "Please turn on your device";
+"Saved successfully" = "Saved successfully";
+"Save failed" = "Save failed";
+"Escape fence notice" = "Escape fence notice";
+"Your pet has left the fence, please open the APP verification" = "Your pet has left the fence, please open the APP verification";
+"Your pet has left the fence, please check" = "Your pet has left the fence, please check";
+"Device signal is weak, please try again" = "Device signal is weak, please try again";
+"Please connect the device first" = "Please connect the device first";
+"Get track failed" = "Get track failed";
+"Closed fence failed" = "Closed fence failed";
+"Failed to create fence" = "Failed to create fence";
+"please enter a valid phone number" = "please enter a valid phone number";
+"Press again to exit the program" = "Press again to exit the program";
+"The device is already landing on another application" = "The device is already landing on another application";
+"AGPS failed to get" = "AGPS failed to get";
+"The equipment is offline" = "he equipment is offline";
+"The pet is out of the fence" = "The pet is out of the fence";
+"The device is not connected" = "The device is not connected";
+"The device is disconnected" = "The device is disconnected";
+"Update failed" = "Update failed";
+"Longitude error" = "Longitude error";
+"Latitude error" = "Latitude error";
+"Radius error" = "Radius error";
+"Can not connect to the network Please try again later" = "Can not connect to the network Please try again later";
+"The connection failed, please reconnect" = "The connection failed, please reconnect";
+"Load failed, please reload" = "Load failed, please reload";
+"The network can not be accessed, please check the network connection" = "The network can not be accessed, please check the network connection";
+"The device signal is weak" = "The device signal is weak";
